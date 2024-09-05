@@ -48,50 +48,43 @@ $(document).ready(function () {
     });
 });
 
-//$(document).ready(function () {
-//    $('#loginForm').on('submit', function (event) {
-//        event.preventDefault();
-//        $('.error').text('');
-//        var isValid = true;
-//        var email = $("#email").val();
-//        if (email === '') {
-//            $('#emailError').text('Email is required');
-//            isValid = false;
-//        } else if (!validateEmail(email)) {
-//            $('#emailError').text("Enter a valid Email");
-//            isValid = false;
-//        }
-//        var password = $("#password").val();
-        //if (password === '') {
-        //    $('#passwordError').text('password is required');
-        //    isValid = false;
-        //} else if (password.length < 8) {
-        //    $('#passwordError').text('password length must be above 8');
-        //    isValid = false;
-        //}
-        //else if (!validatePassword(password)) {
-        //    $('#passwordError').text("password must contain at least one uppercase letter, one special character, and one number");
-        //    isValid = false;
-        //}
-    });
-});
-
-
 $(document).ready(function () {
-    $('#loginform').on('submit', function (event) {
-        event.preventdefault(); 
-        var formdata = $(this).serialize(); 
-        $.ajax({
-            url: $(this).attr('action'),
-            type: 'post',
-            data: formdata,
-            success: function (response) {
-                window.location.href = response.redirecturl;
-            },
-            error: function (xhr) {
-                var response = json.parse(xhr.responsetext);
-                $('#formerror').text(response.message); 
-            }
-        });
+    $('#LoginForm').on('submit', function (event) {
+        event.preventDefault();  
+
+        $('.error').text('');
+        var isValid = true;
+
+        var email = $("#email").val();
+        if (email === '') {
+            $('#emailError').text('Email is required');
+            isValid = false;
+        }
+
+        var password = $("#password").val();
+        if (password === '') {
+            $('#passwordError').text('Password is required');
+            isValid = false;
+        }
+
+        if (isValid) {
+            //$.ajax({
+            //    url: 'http://localhost:5299/api/User/login/',
+            //    type: 'POST',
+            //    dataType: 'json',
+            //    data:
+            //    {
+            //        Email: email,
+            //        Password: password
+            //    },
+            //    success: function () {
+            //        alert('success');
+            //    },
+            //    error: function () {
+            //        alert('error');
+            //    }
+            //});
+            this.submit();
+        }
     });
 });
