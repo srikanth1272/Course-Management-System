@@ -25,16 +25,16 @@ namespace CourseApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(User user)
         {
-            var response = await client.PostAsJsonAsync("", user);
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index","Home");
-            }
-            else
-            {
-                var errorMessage = await response.Content.ReadAsStringAsync();
-                throw new Exception(errorMessage);
-            }
+                var response = await client.PostAsJsonAsync("", user);
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    throw new Exception(errorMessage);
+                }
         }
         public ActionResult Login()
         {
