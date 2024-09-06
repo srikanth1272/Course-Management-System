@@ -15,7 +15,7 @@ namespace UserLibrary.Repos
         public EFUserRepoAsync()
         {
             con = new SqlConnection();
-            con.ConnectionString = @"data source =(localdb)\MSSQLLocalDB;database = CourseDB; integrated security = true";
+            con.ConnectionString = @"data source =(localdb)\MSSQLLocalDB;database = UserDB; integrated security = true";
             cmd = new SqlCommand();
             cmd.Connection = con;
         }
@@ -93,8 +93,9 @@ namespace UserLibrary.Repos
             try
             {
                 await con.OpenAsync();
-                cmd.CommandText = "update Users set Username = @username where CourseCode = @username";
+                cmd.CommandText = "update Users set Username = @username where email = @email";
                 cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@email", email);
                 await cmd.ExecuteNonQueryAsync();
                 await con.CloseAsync();
             }

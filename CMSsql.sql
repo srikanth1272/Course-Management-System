@@ -1,6 +1,6 @@
-﻿create database CourseDB
+﻿create database UserDB
 
-use CourseDB
+use UserDB
 
 create table Users(
 email varchar(30) primary key,

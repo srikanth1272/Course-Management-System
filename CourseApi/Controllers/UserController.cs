@@ -41,5 +41,19 @@ namespace CourseApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut("{Email}")]
+        public async Task<ActionResult> Update(string Email, User user)
+        {
+            try
+            {
+                await repo.UpdateUserAsync(Email, user.UserName);
+                return Ok();
+            }
+            catch (UserException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

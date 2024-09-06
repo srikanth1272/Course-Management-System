@@ -1,18 +1,16 @@
 ﻿using CourseApp.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Web.Security;
 
-namespace CourseApp.Controllers
+
+namespace CourseApp.Controllers 
 {
+
     public class UserController : Controller
     {
         HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5299/api/User/") };
@@ -33,8 +31,9 @@ namespace CourseApp.Controllers
                 else
                 {
                     var errorMessage = await response.Content.ReadAsStringAsync();
-                    throw new Exception(errorMessage);
+                   ModelState.AddModelError("", errorMessage);
                 }
+                return View(user);
         }
         public ActionResult Login()
         {
@@ -45,16 +44,47 @@ namespace CourseApp.Controllers
         public async Task<ActionResult> Login(User user)
         {
             User user1 = await client.GetFromJsonAsync<User>($"{user.Email}");
-            if (user1.Password == user.Password)
-                return RedirectToAction(nameof(Details),new { email = user.Email });
-            else
-                throw new Exception("Incorrect password");        
-        }
 
+            if (user1.Password == user.Password)
+            {
+                Session["Email"] = user1.Email;
+                return RedirectToAction("Index", "Home");
+
+            }
+            else
+                ModelState.AddModelError("", "Incorrecr Email or Password");
+            
+            return View(user);
+        }
         public async Task<ActionResult> Details(string Email)
         {
             User user = await client.GetFromJsonAsync<User>(""+Email);
             return View(user);
         }
+        public  ActionResult Logout()
+        {
+            Session["Email"] = null ;
+            return RedirectToAction("Login", "User");
+        }
+
+
+        [Route("User/Edit/{Email}")]
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("User/Edit/{Email}")]
+        public async Task<ActionResult> Edit(string Email, User user)
+        {
+            var response = await client.PutAsJsonAsync($"{Email}", user);
+            if (response.IsSuccessStatusCode)
+                return RedirectToAction(nameof(Details), new { Email = Email });
+            else
+                return View();
+        }
+
     }
 }

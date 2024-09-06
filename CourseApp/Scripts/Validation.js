@@ -41,7 +41,11 @@ $(document).ready(function () {
             $('#passwordError').text("password must contain at least one uppercase letter, one special character, and one number");
             isValid = false;
         }
-
+        var confirmPassword = $('#confirmPassword').val();
+        if (confirmPassword != password) {
+            $('#confirmPasswordError').text('Password Does not Match. Please Check');
+            isValid = false;
+        }
         if (isValid) {
             this.submit(); 
         }

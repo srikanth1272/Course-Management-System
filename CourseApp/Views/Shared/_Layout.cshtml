@@ -18,11 +18,24 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Register", "Register", "User", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Login", "Login", "User", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>
+            @if (Session["Email"] == null)
+            {
+                    <ul class="navbar-nav mr-auto">
+                        <li>@Html.ActionLink("Login", "Login", "User", new { area = "" }, new { @class = "nav-link btn btn-primary" })</li>
+                    </ul>
+            }
+            @if (Session["Email"] != null)
+            {
+                    <ul class="navbar-nav mr-auto">
+                        <li>@Html.ActionLink("Profile", "Details", "User", new { Email = Session["Email"] }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "User", new {  }, new { @class = "nav-link btn btn-danger" })</li>
+                    </ul>
+               
+            }
         </div>
+
     </nav>
     <div class="container body-content">
         @RenderBody()
