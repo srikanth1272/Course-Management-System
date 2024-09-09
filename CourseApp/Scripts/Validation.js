@@ -17,8 +17,8 @@ $(document).ready(function () {
             $('#userNameError').text('Username is Required');
             isValid = false;
         }
-        else if (username.length > 10) {
-            $('#userNameError').text('Username length should be less than 10');
+        else if (username.length > 20) {
+            $('#userNameError').text('Username length should be less than 20');
             isValid = false;
         }
         var email = $("#email").val();
@@ -47,6 +47,7 @@ $(document).ready(function () {
             isValid = false;
         }
         if (isValid) {
+            toastr.success('Registerd successful!');
             this.submit(); 
         }
     });
