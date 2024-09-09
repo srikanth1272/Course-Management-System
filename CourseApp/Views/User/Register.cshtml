@@ -8,7 +8,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src='@Url.Content("~/Scripts/validation.js")' type='text/javascript'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 </head>
@@ -19,9 +18,10 @@
     @{
         if (ViewData.ModelState.Count > 0)
         {
-            <div class="alert alert-danger">
-                @Html.ValidationSummary()
-            </div>
+        <div class="alert alert-danger">
+            @Html.ValidationSummary()
+            toastr.error("An Error Occurred While Registering");
+        </div>
         }
     }
     @using (Html.BeginForm("Register", "User", FormMethod.Post, new { @id = "RegisterForm" }))

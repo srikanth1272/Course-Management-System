@@ -83,7 +83,7 @@ namespace SubjectLibrary.Repos
 
         public async Task<Subject> GetSubject(string subjectId)
         {
-            cmd.CommandText = "Select * from Subject where subjectId = "+subjectId;
+            cmd.CommandText = "Select * from Subject where SubjectId = '"+subjectId+"'";
             Subject subject = new ();
             await con.OpenAsync();
             SqlDataReader reader = await cmd.ExecuteReaderAsync();

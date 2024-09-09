@@ -48,7 +48,7 @@ $(document).ready(function () {
         }
         if (isValid) {
             toastr.success('Registerd successful!');
-            this.submit(); 
+            this.submit();
         }
     });
 });
@@ -73,23 +73,58 @@ $(document).ready(function () {
         }
 
         if (isValid) {
-            //$.ajax({
-            //    url: 'http://localhost:5299/api/User/login/',
-            //    type: 'POST',
-            //    dataType: 'json',
-            //    data:
-            //    {
-            //        Email: email,
-            //        Password: password
-            //    },
-            //    success: function () {
-            //        alert('success');
-            //    },
-            //    error: function () {
-            //        alert('error');
-            //    }
-            //});
+            toastr.success('Logged In!');
             this.submit();
         }
     });
 });
+
+
+$(document).ready(function () {
+    $("#SubjectForm").on('submit', function (event) {
+        event.preventDefault();
+        $('.error').text('');
+        var isValid = true;
+
+        var SubjectId = $("#SubjectId").val();
+        if (SubjectId === '') {
+            $('#idError').text('Please enter SubjectId');
+            isValid = false;
+        }
+        else if (SubjectId.length != 6) {
+            $('#idError').text('SubjectId must be 6 characters');
+            isValid = false;
+        }
+        var Title = $("#Title").val();
+        if (Title === '') {
+            $('#titleError').text('Please enter Subject Title');
+            isValid = false;
+        }
+        else if (Title.length > 40) {
+            $('#titleError').text('title must be less than 40');
+            isValid = false;
+        }
+        var TotalClasses = $("#TotalClasses").val();
+        if (TotalClasses === '') {
+            $('#classError').text('Please enter Total Classes');
+            isValid = false;
+        }
+        else if (TotalClasses <= 0) {
+            $('#classError').text('Total Classes must be greater than 0');
+            isValid = false;
+        }
+        var Credits = $("#Credits").val();
+        if (Credits === '') {
+            $('#creditError').text('Please enter Credits.');
+            isValid = false;
+        }
+        else if (Credits <= 0) {
+            $('#creditError').text('Credits must be greater than 0');
+            isValid = false;
+        }
+
+        if (isValid)
+            this.submit();
+
+    });
+})

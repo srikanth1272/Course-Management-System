@@ -1,0 +1,62 @@
+﻿@model IEnumerable<CourseApp.Models.Subject>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src=" https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+
+</head>
+<body>
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table  id="myTable" class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.SubjectId)</th>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                <th>@Html.DisplayNameFor(model => model.TotalClasses)</th>
+                <th>@Html.DisplayNameFor(model => model.Credits)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.SubjectId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalClasses)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Credits)</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { subjectId = item.SubjectId }) |
+                        @Html.ActionLink("Details", "Details", new { subjectId = item.SubjectId }) |
+                        @Html.ActionLink("Delete", "Delete", new { subjectId = item.SubjectId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+   
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+
+      
+    </script>
+</body>
+</html>

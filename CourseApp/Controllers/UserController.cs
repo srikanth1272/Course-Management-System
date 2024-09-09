@@ -49,6 +49,7 @@ namespace CourseApp.Controllers
             var pass = user.Password;
             var hash1 = System.Text.Encoding.UTF8.GetBytes(pass);
             user.Password = System.Convert.ToBase64String(hash1);
+
             try
             {
                 User user1 = await client.GetFromJsonAsync<User>($"{user.Email}");
@@ -59,10 +60,13 @@ namespace CourseApp.Controllers
 
                 }
                 else
+                {
                     ModelState.AddModelError("", "Incorrect Password");
+                }
             }
             catch (Exception)
             {
+                TempData["ErrorMessage"] = "An error occurred while logging in.";
                 ModelState.AddModelError("", "This Email Doesn't Exists");
             }
 
