@@ -49,17 +49,23 @@ namespace CourseApp.Controllers
             var pass = user.Password;
             var hash1 = System.Text.Encoding.UTF8.GetBytes(pass);
             user.Password = System.Convert.ToBase64String(hash1);
-            User user1 = await client.GetFromJsonAsync<User>($"{user.Email}");
-
-            if (user1.Password == user.Password)
+            try
             {
-                Session["Email"] = user1.Email;
-                return RedirectToAction("Index", "Home");
+                User user1 = await client.GetFromJsonAsync<User>($"{user.Email}");
+                if (user1.Password == user.Password)
+                {
+                    Session["Email"] = user1.Email;
+                    return RedirectToAction("Index", "Home");
 
+                }
+                else
+                    ModelState.AddModelError("", "Incorrect Password");
             }
-            else
-                ModelState.AddModelError("", "Incorrecr Email or Password");
-            
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "This Email Doesn't Exists");
+            }
+
             return View(user);
         }
         public async Task<ActionResult> Details(string Email)
