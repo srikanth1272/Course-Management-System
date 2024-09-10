@@ -123,8 +123,10 @@ $(document).ready(function () {
             isValid = false;
         }
 
-        if (isValid)
+        if (isValid) {
+            toastr.success('Created Successful!');
             this.submit();
+        }
 
     });
 })

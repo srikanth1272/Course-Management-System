@@ -20,7 +20,7 @@
         {
         <div class="alert alert-danger">
             @Html.ValidationSummary()
-            toastr.error("An Error Occurred While Registering");
+            <script>toastr.error("An Error Occurred While Registering");</script>
         </div>
         }
     }

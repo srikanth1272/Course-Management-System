@@ -42,8 +42,9 @@ namespace CourseApp.Controllers
             else
             {
                 var errorMessage = await response.Content.ReadAsStringAsync();
-                throw new Exception(errorMessage);
+                ModelState.AddModelError("", errorMessage);
             }
+            return View(subject);
 
         }
 
