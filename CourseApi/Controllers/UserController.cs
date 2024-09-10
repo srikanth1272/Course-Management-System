@@ -65,8 +65,8 @@ namespace CourseApi.Controllers
             {
                 User user1 = await repo.GetUserAsync(user.Email);
                 if (user1.Password == user.Password)
-                {                  
-                    return RedirectToAction("Index", "Home");
+                {
+                    return Ok();
                 }
                 else
                 {
