@@ -15,15 +15,6 @@
 
 <body>
     <h2>Login</h2>
-    @{
-        if (ViewData.ModelState.Count > 0)
-        {
-            <div class="alert alert-danger">
-                @Html.ValidationSummary()
-                <script>toastr.error("An Error Occurred While Logging");</script>
-            </div>
-        }
-    }
     @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @id = "LoginForm" }))
     {
         <span class="error text-danger" id="formError"></span>

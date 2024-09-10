@@ -71,7 +71,7 @@ $(document).ready(function () {
             $('#passwordError').text('Password is required');
             isValid = false;
         }
-
+        var valid = false;
         if (isValid) {
             $.ajax({
                 type: "POST",
@@ -79,14 +79,18 @@ $(document).ready(function () {
                 data: JSON.stringify({  "email": email,"username": "", "password": password }),
                 contentType: 'application/json',
                 success: function (response) {
-                    toastr.success("Logged In Successfully!");
-                    setTimeout(function () {
-                        window.location.href = "/home";
-                    }, 500); 
+                    $.ajax({
+                        type: "POST",
+                        url: "/User/Authenticate",  
+                        data: JSON.stringify({ email: email }),
+                        contentType: 'application/json',
+                        success: function () {
+                            toastr.success("Logged In Successfully")
+                            setTimeout(function () { window.location.href = "/home"; }, 500);
+                        }
+                    });
                 },
-
                 error: function (jqXHR, textStatus, errorThrown) {
-                    
                     let errorMessage = "An unknown error occurred.";
 
                     
@@ -102,6 +106,8 @@ $(document).ready(function () {
                 }
             });
         }
+       
+        
     });
 });
 
