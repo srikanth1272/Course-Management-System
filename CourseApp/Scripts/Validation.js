@@ -47,8 +47,20 @@ $(document).ready(function () {
             isValid = false;
         }
         if (isValid) {
-            toastr.success('Registerd successful!');
-            this.submit();
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:5299/api/User/",
+                data: JSON.stringify({ "email": email, "username": username, "password": password }),
+                contentType: 'application/json',
+                success: function (response) {
+                    toastr.success("Registered Successfully")
+                    setTimeout(function () { window.location.href = "/home"; }, 500);
+                },
+                error: function (jqXHR) { 
+                    errorMessage = jqXHR.responseText;
+                    toastr.error(errorMessage);
+                }
+            });
         }
     });
 });
@@ -71,7 +83,6 @@ $(document).ready(function () {
             $('#passwordError').text('Password is required');
             isValid = false;
         }
-        var valid = false;
         if (isValid) {
             $.ajax({
                 type: "POST",
@@ -90,24 +101,13 @@ $(document).ready(function () {
                         }
                     });
                 },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    let errorMessage = "An unknown error occurred.";
-
-                    
-                    if (jqXHR.responseText) {
-                      
-                        errorMessage = jqXHR.responseText;
-                    } else {
-                       
-                        errorMessage = textStatus || errorThrown || errorMessage;
-                    }
-
+                error: function (jqXHR) {
+                 
+                    errorMessage = jqXHR.responseText;
                     toastr.error(errorMessage);
                 }
             });
         }
-       
-        
     });
 });
 

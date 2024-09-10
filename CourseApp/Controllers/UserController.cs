@@ -19,25 +19,6 @@ namespace CourseApp.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(User user)
-        {
-            var pass = user.Password;
-            var hash1 = System.Text.Encoding.UTF8.GetBytes(pass);
-            user.Password = System.Convert.ToBase64String(hash1);
-            var response = await client.PostAsJsonAsync("", user);
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                var errorMessage = await response.Content.ReadAsStringAsync();
-                ModelState.AddModelError("", errorMessage);
-            }
-            return View(user);
-        }
         public ActionResult Login()
         {
             return View();
