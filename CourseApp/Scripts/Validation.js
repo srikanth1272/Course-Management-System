@@ -73,8 +73,34 @@ $(document).ready(function () {
         }
 
         if (isValid) {
-            toastr.success('Logged In!');
-            this.submit();
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:5299/api/User/Login",
+                data: JSON.stringify({  "email": email,"username": "", "password": password }),
+                contentType: 'application/json',
+                success: function (response) {
+                    toastr.success("Logged In Successfully!");
+                    setTimeout(function () {
+                        window.location.href = "/home";
+                    }, 500); 
+                },
+
+                error: function (jqXHR, textStatus, errorThrown) {
+                    
+                    let errorMessage = "An unknown error occurred.";
+
+                    
+                    if (jqXHR.responseText) {
+                      
+                        errorMessage = jqXHR.responseText;
+                    } else {
+                       
+                        errorMessage = textStatus || errorThrown || errorMessage;
+                    }
+
+                    toastr.error(errorMessage);
+                }
+            });
         }
     });
 });

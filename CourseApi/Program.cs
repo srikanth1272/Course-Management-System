@@ -13,9 +13,20 @@ namespace CourseApi
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:51852")  // Replace with your frontend URL
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            });
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IUserRepoAsync,EFUserRepoAsync>();
+           
 
             var app = builder.Build();
 
@@ -25,7 +36,7 @@ namespace CourseApi
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseCors("AllowSpecificOrigin");
             app.UseAuthorization();
 
 

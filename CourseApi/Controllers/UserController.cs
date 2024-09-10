@@ -55,5 +55,28 @@ namespace CourseApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPost("Login")]
+        public async Task<ActionResult> Login(User user)
+        {
+            var pass = user.Password;
+            var hash1 = System.Text.Encoding.UTF8.GetBytes(pass);
+            user.Password = System.Convert.ToBase64String(hash1);
+            try
+            {
+                User user1 = await repo.GetUserAsync(user.Email);
+                if (user1.Password == user.Password)
+                {                  
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                  return BadRequest("Incorrect Password");
+                }
+            }
+            catch (UserException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

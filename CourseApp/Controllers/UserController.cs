@@ -42,36 +42,6 @@ namespace CourseApp.Controllers
         {
             return View();
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(User user)
-        {
-            var pass = user.Password;
-            var hash1 = System.Text.Encoding.UTF8.GetBytes(pass);
-            user.Password = System.Convert.ToBase64String(hash1);
-
-            try
-            {
-                User user1 = await client.GetFromJsonAsync<User>($"{user.Email}");
-                if (user1.Password == user.Password)
-                {
-                    Session["Email"] = user1.Email;
-                    return RedirectToAction("Index", "Home");
-
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Incorrect Password");
-                }
-            }
-            catch (Exception)
-            {
-                TempData["ErrorMessage"] = "An error occurred while logging in.";
-                ModelState.AddModelError("", "This Email Doesn't Exists");
-            }
-
-            return View(user);
-        }
         public async Task<ActionResult> Details(string Email)
         {
             User user = await client.GetFromJsonAsync<User>(""+Email);
