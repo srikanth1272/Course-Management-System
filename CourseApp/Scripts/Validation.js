@@ -53,8 +53,17 @@ $(document).ready(function () {
                 data: JSON.stringify({ "email": email, "username": username, "password": password }),
                 contentType: 'application/json',
                 success: function (response) {
-                    toastr.success("Registered Successfully")
-                    setTimeout(function () { window.location.href = "/home"; }, 500);
+                    $.ajax({
+                        type: "POST",
+                        url: "/User/Authenticate",
+                        data: JSON.stringify({ email: email }),
+                        contentType: 'application/json',
+                        success: function () {
+                            toastr.success("Registered Successfully and Logged In.")
+                           
+                            setTimeout(function () { window.location.href = "/home"; }, 1000);
+                        }
+                    });
                 },
                 error: function (jqXHR) { 
                     errorMessage = jqXHR.responseText;
@@ -97,7 +106,7 @@ $(document).ready(function () {
                         contentType: 'application/json',
                         success: function () {
                             toastr.success("Logged In Successfully")
-                            setTimeout(function () { window.location.href = "/home"; }, 500);
+                            setTimeout(function () { window.location.href = "/home"; }, 1000);
                         }
                     });
                 },

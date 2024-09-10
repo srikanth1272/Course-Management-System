@@ -3,67 +3,89 @@
 @{
     ViewBag.Title = "Index";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src=" https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+    <script type="text/javascript">
+        var js = jQuery.noConflict();
+        js(document).ready(function () {
+            js('#myTable').DataTable({
 
-<h2>Index</h2>
+            });
+        });
+    </script>
+</head>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RollNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DOB)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th></th>
-    </tr>
+<body>
+    <h2>Index</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table id="myTable" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RollNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DOB)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RollNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DOB.ToString().Split(' ')[0])
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new {  rollNo=item.RollNo }) |
-            @Html.ActionLink("Details", "Details", new { rollNo = item.RollNo }) |
-            @Html.ActionLink("Delete", "Delete", new { rollNo = item.RollNo })
-        </td>
-    </tr>
-}
-
-</table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RollNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DOB.ToString().Split(' ')[0])
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { rollNo = item.RollNo }) |
+                        @Html.ActionLink("Details", "Details", new { rollNo = item.RollNo }) |
+                        @Html.ActionLink("Delete", "Delete", new { rollNo = item.RollNo })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
