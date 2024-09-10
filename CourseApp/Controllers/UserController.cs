@@ -10,7 +10,6 @@ using System.Web.Security;
 
 namespace CourseApp.Controllers 
 {
-
     public class UserController : Controller
     {
         HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5299/api/User/") };

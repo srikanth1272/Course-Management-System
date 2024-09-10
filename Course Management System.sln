@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentLibrary", "StudentLi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubjectLibrary", "SubjectLibrary\SubjectLibrary.csproj", "{F5F82390-0286-4A66-9690-6F35C75891C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubjectWebApi", "SubjectWebApi\SubjectWebApi.csproj", "{898D3D8A-0F5C-49C1-B93A-F15AE9C9E705}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubjectWebApi", "SubjectWebApi\SubjectWebApi.csproj", "{898D3D8A-0F5C-49C1-B93A-F15AE9C9E705}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentWebApi", "StudentWebApi\StudentWebApi.csproj", "{293A46BA-3CBA-4FF8-875D-9625A1DD14DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{898D3D8A-0F5C-49C1-B93A-F15AE9C9E705}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{898D3D8A-0F5C-49C1-B93A-F15AE9C9E705}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{898D3D8A-0F5C-49C1-B93A-F15AE9C9E705}.Release|Any CPU.Build.0 = Release|Any CPU
+		{293A46BA-3CBA-4FF8-875D-9625A1DD14DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{293A46BA-3CBA-4FF8-875D-9625A1DD14DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{293A46BA-3CBA-4FF8-875D-9625A1DD14DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{293A46BA-3CBA-4FF8-875D-9625A1DD14DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
