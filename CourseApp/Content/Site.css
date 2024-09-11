@@ -3,6 +3,7 @@
     margin-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
+   
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -17,4 +18,13 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.body {
+    background-image: url("Images/5.jfif");
+    background-size: cover;
+}
+body{
+    background-image: url("Images/2.jfif");
+    background-size: cover;
 }

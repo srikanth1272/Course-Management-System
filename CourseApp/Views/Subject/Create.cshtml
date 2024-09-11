@@ -12,7 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
-
+<body class="body">
 @using (Html.BeginForm("Create", "Subject", FormMethod.Post, new { @id = "SubjectForm" }))
 {
     @Html.AntiForgeryToken()
@@ -67,3 +67,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+</body>

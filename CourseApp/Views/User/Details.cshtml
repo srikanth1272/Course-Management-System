@@ -6,32 +6,35 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<h2>Details</h2>
-<div>
-    <hr />
-    <dl class="dl-horizontal" style="margin-left:15px">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+<body class="body">
+    <h2>Details</h2>
+    <div>
+        <hr />
+        <dl class="dl-horizontal" style="margin-left:15px">
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
 
-    </dl>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Edit
-    </button>
-</div>
-<div class="modal-body">
-    @Html.Partial("Edit")
-</div>
+        </dl>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Edit
+        </button>
+    </div>
+    <div class="modal-body">
+        @Html.Partial("Edit")
+    </div>
 
+</body>
