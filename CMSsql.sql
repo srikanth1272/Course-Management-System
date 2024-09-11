@@ -9,9 +9,9 @@ password varchar(255) not null
 )
 
 
-create database SubjectDB
+create database CMDB
 
-use SubjectDB
+use CMDB
 
 create table Subject(
 SubjectId char(6) primary key,
@@ -19,10 +19,6 @@ Title varchar(40) unique not null,
 TotalClasses int not null,
 Credits int not null
 )
-
-create database StudentDB
-
-use StudentDB
 
 create table Student(
 RollNo char(10) primary key,
@@ -33,4 +29,3 @@ Email varchar(30) unique not null,
 Phone char(10) unique not null,
 Address varchar(100) not null
 )
-drop table student

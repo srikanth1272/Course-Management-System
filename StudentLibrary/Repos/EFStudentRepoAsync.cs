@@ -17,7 +17,7 @@ namespace StudentLibrary.Repos
         public EFStudentRepoAsync()
         {
             con = new SqlConnection();
-            con.ConnectionString = @"data source =(localdb)\MSSQLLocalDB;database = StudentDB; integrated security = true";
+            con.ConnectionString = @"data source =(localdb)\MSSQLLocalDB;database = CMDB; integrated security = true";
             cmd = new SqlCommand();
             cmd.Connection = con;
         }

@@ -3,5 +3,33 @@
 }
 
 <body>
-    <center><h1>Welcome To Course Management System</h1></center>
+    <div class="hero-section">
+        <h1 class="display-4"> Welcome To Course Management System</h1>
+    </div>
+   
+    <section class="sec">
+        <div class="container1">
+            <div class="card-container">
+                <div class="card">
+                    <a href="@Url.Action("Index", "Student")" style="color:aliceblue">
+                        <img src="~/Content/Images/1.jfif" class="card-logo">
+                        <h3 style="color:#3c5881; font-weight:bold">Students</h3>
+                    </a>
+                </div>
+                <div class="card">
+                    <a href="@Url.Action("Index", "Subject")" style="color:aliceblue">
+                        <img src="~/Content/Images/1.jfif" class="card-logo">
+                        <h3 style="color:#3c5881; font-weight:bold">Subjects</h3>
+                    </a>
+                </div>
+                <div class="card">
+                    <a href="@Url.Action("Index", "home")" style="color:aliceblue">
+                        <img src="~/Content/Images/1.jfif" class="card-logo">
+                        <h3 style="color:#3c5881; font-weight:bold">Student Subjects</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </body>

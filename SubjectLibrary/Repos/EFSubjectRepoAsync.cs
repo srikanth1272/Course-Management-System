@@ -16,7 +16,7 @@ namespace SubjectLibrary.Repos
         {
             con = new SqlConnection
             {
-                ConnectionString = @"data source =(localdb)\MSSQLLocalDB;database = SubjectDB; integrated security = true"
+                ConnectionString = @"data source =(localdb)\MSSQLLocalDB;database = CMDB; integrated security = true"
             };
             cmd = new SqlCommand
             {
