@@ -6,7 +6,7 @@ namespace CourseApi
     public class Program
     {
         public static void Main(string[] args)
-        {
+       {
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -18,7 +18,7 @@ namespace CourseApi
                 options.AddPolicy("AllowSpecificOrigin",
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:51852")  // Replace with your frontend URL
+                        builder.WithOrigins("http://localhost:51852")  
                                .AllowAnyHeader()
                                .AllowAnyMethod();
                     });

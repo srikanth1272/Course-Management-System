@@ -31,23 +31,6 @@ namespace CourseApp.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Create(Subject subject)
-        {
-            var response = await client.PostAsJsonAsync<Subject>("", subject);
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                var errorMessage = await response.Content.ReadAsStringAsync();
-                ModelState.AddModelError("", errorMessage);
-            }
-            return View(subject);
-
-        }
-
         [Route("Subject/Edit/{subjectId}")]
         public async Task<ActionResult> Edit(string subjectId)
         {
@@ -56,23 +39,7 @@ namespace CourseApp.Controllers
         }
 
        
-        [HttpPost]
-        [Route("Subject/Edit/{subjectId}")]
-
-        public async Task<ActionResult> Edit(string subjectId, Subject subject)
-        {
-            var response = await client.PutAsJsonAsync<Subject>(""+subjectId, subject);
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                var errorMessage = await response.Content.ReadAsStringAsync();
-                throw new Exception(errorMessage);
-            }
-        }
-
+      
         [Route("Subject/Delete/{subjectId}")]
         public async Task<ActionResult> Delete(string subjectId)
         {
@@ -85,8 +52,16 @@ namespace CourseApp.Controllers
         [Route("Subject/Delete/{subjectId}")]
         public async Task<ActionResult> Delete(string subjectId, Subject subject)
         {
-            await client.DeleteAsync($"{subjectId}");
-            return RedirectToAction(nameof(Index));
+             var response = await client.DeleteAsync($"{subjectId}");
+            if (response.IsSuccessStatusCode)
+            {
+                return Json(new { success = true, message = "Deleted successfully" });
+            }
+            else
+            {    
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                return Json(new { success = true, message = errorMessage });
+            }
         }
     }
 }

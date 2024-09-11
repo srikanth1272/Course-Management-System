@@ -56,7 +56,7 @@ namespace CourseApp.Controllers
         public ActionResult Logout()
         {
             Session["Email"] = null;
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "User");
         }
 
     }

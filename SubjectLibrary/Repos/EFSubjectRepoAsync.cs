@@ -56,7 +56,7 @@ namespace SubjectLibrary.Repos
             catch
             {
                 await con.CloseAsync();
-                throw new SubjectException("Cannot Delete Subject. It is opted by Subjects");
+                throw new SubjectException("Cannot Delete Subject. It is opted by Students");
             }
         }
 

@@ -6,7 +6,34 @@ function validatePassword(password) {
     var passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordPattern.test(password);
 }
+
 $(document).ready(function () {
+
+    $('#username').blur(function () {
+        var username = $("#username").val();
+        if (username === '')
+            $('#userNameError').text('Username is Required');
+        else if (username.length > 20)
+            $('#userNameError').text('Username length should be less than 20');
+    });
+
+    $('#email').blur(function () {
+        var email = $(this).val();
+        if (email === '')
+            $('#emailError').text('Email is required');
+        else if (!validateEmail(email))
+            $('#emailError').text("Enter a valid Email");
+    });
+
+    $('#password').blur(function () {
+        var password = $("#password").val();
+        if (password === '')
+            $('#passwordError').text('Password is required');
+        else if (password.length < 8) 
+            $('#passwordError').text('password length must be above 8');
+        else if (!validatePassword(password)) 
+            $('#passwordError').text("password must contain at least one uppercase letter, one special character, and one number");
+    });
     $('#RegisterForm').on('submit', function (event) {
         event.preventDefault();
         $('.error').text('');
@@ -17,30 +44,16 @@ $(document).ready(function () {
             $('#userNameError').text('Username is Required');
             isValid = false;
         }
-        else if (username.length > 20) {
-            $('#userNameError').text('Username length should be less than 20');
-            isValid = false;
-        }
         var email = $("#email").val();
         if (email === '') {
             $('#emailError').text('Email is required');
             isValid = false;
-        } else if (!validateEmail(email)){
-            $('#emailError').text("Enter a valid Email");
-            isValid = false;
-        }
+        } 
         var password = $("#password").val();
         if (password === '') {
             $('#passwordError').text('password is required');
             isValid = false;
-        } else if (password.length < 8) {
-            $('#passwordError').text('password length must be above 8');
-            isValid = false;
-        }
-        else if (!validatePassword(password)) {
-            $('#passwordError').text("password must contain at least one uppercase letter, one special character, and one number");
-            isValid = false;
-        }
+        } 
         var confirmPassword = $('#confirmPassword').val();
         if (confirmPassword != password) {
             $('#confirmPasswordError').text('Password Does not Match. Please Check');
@@ -75,6 +88,17 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    $('#email').blur(function () {
+        var email = $(this).val();
+        if (email === '')
+            $('#emailError').text('Email is required');
+    });
+    $('#password').blur(function () {
+        var password = $("#password").val();
+        if (password === '')
+            $('#passwordError').text('Password is required');
+    });
+
     $('#LoginForm').on('submit', function (event) {
         event.preventDefault();  
 
@@ -120,54 +144,3 @@ $(document).ready(function () {
     });
 });
 
-
-$(document).ready(function () {
-    $("#SubjectForm").on('submit', function (event) {
-        event.preventDefault();
-        $('.error').text('');
-        var isValid = true;
-
-        var SubjectId = $("#SubjectId").val();
-        if (SubjectId === '') {
-            $('#idError').text('Please enter SubjectId');
-            isValid = false;
-        }
-        else if (SubjectId.length != 6) {
-            $('#idError').text('SubjectId must be 6 characters');
-            isValid = false;
-        }
-        var Title = $("#Title").val();
-        if (Title === '') {
-            $('#titleError').text('Please enter Subject Title');
-            isValid = false;
-        }
-        else if (Title.length > 40) {
-            $('#titleError').text('title must be less than 40');
-            isValid = false;
-        }
-        var TotalClasses = $("#TotalClasses").val();
-        if (TotalClasses === '') {
-            $('#classError').text('Please enter Total Classes');
-            isValid = false;
-        }
-        else if (TotalClasses <= 0) {
-            $('#classError').text('Total Classes must be greater than 0');
-            isValid = false;
-        }
-        var Credits = $("#Credits").val();
-        if (Credits === '') {
-            $('#creditError').text('Please enter Credits.');
-            isValid = false;
-        }
-        else if (Credits <= 0) {
-            $('#creditError').text('Credits must be greater than 0');
-            isValid = false;
-        }
-
-        if (isValid) {
-            toastr.success('Created Successful!');
-            this.submit();
-        }
-
-    });
-})
