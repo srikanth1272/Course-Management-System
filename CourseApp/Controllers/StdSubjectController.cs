@@ -55,6 +55,8 @@ namespace CourseApp.Controllers
         public async Task<ActionResult> Edit(string rollNo, string subjectId)
         {
             StdSubject stdSubject = await client.GetFromJsonAsync<StdSubject>($"{rollNo}/{subjectId}");
+            var semister = Helper.GetSemisters();
+            ViewBag.Semister = semister;
             return View(stdSubject);
         }
 
