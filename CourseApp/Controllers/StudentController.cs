@@ -62,7 +62,7 @@ namespace CourseApp.Controllers
             else
             {
                 var errorMessage = await response.Content.ReadAsStringAsync();
-                return Json(new { success = true, message = errorMessage });
+                return Json(new { success = false, message = errorMessage });
             }
         }
     }

@@ -46,12 +46,19 @@ namespace StudentLibrary.Repos
 
         public async Task DeleteStudent(string RollNo)
         {
-            
-            await con.OpenAsync();
-            cmd.CommandText = "Delete from Student where RollNo = @RollNo";
-            cmd.Parameters.AddWithValue("@RollNo", RollNo);
-            await cmd.ExecuteNonQueryAsync();
-            await con.CloseAsync();
+            try
+            {
+                await con.OpenAsync();
+                cmd.CommandText = "Delete from Student where RollNo = @RollNo";
+                cmd.Parameters.AddWithValue("@RollNo", RollNo);
+                await cmd.ExecuteNonQueryAsync();
+                await con.CloseAsync();
+            }
+            catch (Exception)
+            {
+                await con.CloseAsync();
+                throw new StudentException("Cannot Delete Student.Delete the opted subjects first and try again ");
+            }
             
         }
 

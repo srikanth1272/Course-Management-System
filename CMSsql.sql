@@ -29,3 +29,12 @@ Email varchar(30) unique not null,
 Phone char(10) unique not null,
 Address varchar(100) not null
 )
+
+
+create table StdSubject(
+RollNo char(10) References Student(RollNo),
+SubjectId char(6) References Subject(SubjectId),
+Semister INT not null,
+primary key(RollNo,SubjectId)
+)
+

@@ -167,12 +167,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StdSubjectController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\StdSubject.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\User.cs" />
@@ -215,6 +217,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\stdSubjectValidation.js" />
     <Content Include="Scripts\studentValidation.js" />
     <Content Include="Scripts\subjectValidation.js" />
     <Content Include="Scripts\userValidation.js" />
@@ -244,6 +247,13 @@
     <Content Include="Views\Student\Create.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
     <Content Include="Views\Student\Delete.cshtml" />
+    <Content Include="Views\StdSubject\Index.cshtml" />
+    <Content Include="Views\StdSubject\BySemister.cshtml" />
+    <Content Include="Views\StdSubject\ByRollNo.cshtml" />
+    <Content Include="Views\StdSubject\Details.cshtml" />
+    <Content Include="Views\StdSubject\Create.cshtml" />
+    <Content Include="Views\StdSubject\Edit.cshtml" />
+    <Content Include="Views\StdSubject\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

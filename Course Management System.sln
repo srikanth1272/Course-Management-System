@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubjectLibrary", "SubjectLi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubjectWebApi", "SubjectWebApi\SubjectWebApi.csproj", "{898D3D8A-0F5C-49C1-B93A-F15AE9C9E705}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentWebApi", "StudentWebApi\StudentWebApi.csproj", "{293A46BA-3CBA-4FF8-875D-9625A1DD14DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentWebApi", "StudentWebApi\StudentWebApi.csproj", "{293A46BA-3CBA-4FF8-875D-9625A1DD14DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StdSubjectLibrary", "StdSubjectLibrary\StdSubjectLibrary.csproj", "{AF12F453-37CB-44FE-B364-67D19B11C33D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StdSubjectWebApi", "StdSubjectWebApi\StdSubjectWebApi.csproj", "{99140EB1-AD87-4CBF-980F-D8E0216161CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{293A46BA-3CBA-4FF8-875D-9625A1DD14DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{293A46BA-3CBA-4FF8-875D-9625A1DD14DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{293A46BA-3CBA-4FF8-875D-9625A1DD14DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF12F453-37CB-44FE-B364-67D19B11C33D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF12F453-37CB-44FE-B364-67D19B11C33D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF12F453-37CB-44FE-B364-67D19B11C33D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF12F453-37CB-44FE-B364-67D19B11C33D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99140EB1-AD87-4CBF-980F-D8E0216161CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99140EB1-AD87-4CBF-980F-D8E0216161CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99140EB1-AD87-4CBF-980F-D8E0216161CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99140EB1-AD87-4CBF-980F-D8E0216161CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

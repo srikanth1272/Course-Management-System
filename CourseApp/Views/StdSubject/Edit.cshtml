@@ -1,0 +1,63 @@
+﻿@model CourseApp.Models.StdSubject
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Edit</h2>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src='@Url.Content("~/Scripts/stdSubjectValidation.js")' type='text/javascript'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</head>
+
+<body class="body">
+    @using (Html.BeginForm("Edit", "StdSubject", FormMethod.Post, new { @id = "StdSubjectForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Student Subject</h4>
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RollNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.RollNo, new { htmlAttributes = new { @class = "form-control", @id = "RollNo" } })
+                    <span class="error text-danger" id="rollNoError"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubjectId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SubjectId, new { htmlAttributes = new { @class = "form-control", @id = "SubjectId" } })
+                    <span class="error text-danger" id="subjectIdError"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Semister, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Semister, new { htmlAttributes = new { @class = "form-control", @id = "Semister" } })
+                    <span class="error text-danger" id="semisterError"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" id="edit" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+</body>

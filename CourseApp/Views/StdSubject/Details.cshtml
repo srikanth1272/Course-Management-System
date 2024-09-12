@@ -1,0 +1,42 @@
+﻿@model CourseApp.Models.StdSubject
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>StdSubject</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RollNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RollNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubjectId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubjectId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Semister)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Semister)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
