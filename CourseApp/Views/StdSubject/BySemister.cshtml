@@ -1,45 +1,55 @@
 ﻿@model IEnumerable<CourseApp.Models.StdSubject>
 
 @{
-    ViewBag.Title = "BySemister";
+    ViewBag.Title = "Index";
 }
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src=" https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+    <script type="text/javascript">
+        var js = jQuery.noConflict();
+        js(document).ready(function () {
+            js('#myTable').DataTable({
 
-<h2>BySemister</h2>
+            });
+        });
+    </script>
+</head>
+<body class="body">
+    <h2>By Semister</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RollNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SubjectId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Semister)
-        </th>
-        <th></th>
-    </tr>
+   
+    <table id="myTable" class="table table-bordered table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RollNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Semister)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RollNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubjectId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Semister)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RollNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Semister)
+                </td>
+               
+            </tr>
+        }
 
-</table>
+    </table>
+</body>

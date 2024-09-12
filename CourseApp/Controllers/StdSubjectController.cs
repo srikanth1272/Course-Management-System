@@ -36,8 +36,16 @@ namespace CourseApp.Controllers
             return View("Details", stdSubject);
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            var students = await Helper.GetStudents();
+            var subjects = await Helper.GetSubjects();
+            var semister = Helper.GetSemisters();
+            ViewBag.Students = students;
+            ViewBag.Subjects = subjects;
+            ViewBag.Semister = semister;    
+
+            
             return View();
         }
 

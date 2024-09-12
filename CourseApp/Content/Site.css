@@ -24,7 +24,7 @@ textarea {
     background-image: url("Images/5.jfif");
     background-size: cover;
 }
-body{
+.wallpaper{
     background-image: url("Images/2.jfif");
     background-size: cover;
 }
@@ -40,7 +40,7 @@ body{
     gap: 20px;
 }
 
-.card {
+.card1 {
     border: 1px solid #ddd;
     padding: 20px;
     top: 180%;
@@ -50,7 +50,7 @@ body{
     transition: transform 0.3s ease;
 }
 
-    .card:hover {
+    .card1:hover {
         transform: scale(1.05);
     }
 
@@ -62,23 +62,23 @@ body{
     margin-bottom: 15px;
 }
 
-.card h3 {
+.card1 h3 {
     margin: 0 0 10px;
 }
 
-.card p {
+.card1 p {
     font-size: 14px;
     color: #555;
 }
 
-.card a {
+.card1 a {
     display: inline-block;
     margin-top: 10px;
     color: #007bff;
     text-decoration: none;
 }
 
-.card a:hover {
+.card1 a:hover {
         text-decoration: underline;
 }
 .sec {
@@ -107,7 +107,7 @@ body{
     margin-top: -10px;
 }
 
-.card {
+.card1 {
     flex: 1;
     min-width: 250px;
     max-width: 300px;
@@ -119,7 +119,7 @@ body{
     transition: transform 0.3s ease;
 }
 
-    .card:hover {
+    .card1:hover {
         transform: translateY(-10px);
     }
 
