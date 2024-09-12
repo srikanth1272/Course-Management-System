@@ -13,11 +13,28 @@
     <script type="text/javascript">
         var js = jQuery.noConflict();
         js(document).ready(function () {
-            js('#myTable').DataTable({
+            js('#myTable').DataTable();
 
+            $('#myTable').on('click', 'a.details-link', function (e) {
+                e.preventDefault();
+
+                var url = $(this).attr('href');
+
+                js.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (result) {
+                        $('#detailsModal .modal-body').html(result);
+                        $('#detailsModal').modal('show');
+                    },
+                    error: function () {
+                        alert('Error loading details');
+                    }
+                });
             });
         });
     </script>
+
 </head>
 
 <body class="body">
@@ -80,12 +97,21 @@
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { rollNo = item.RollNo }) |
-                        @Html.ActionLink("Details", "Details", new { rollNo = item.RollNo }) |
+                        @Html.ActionLink("Details", "Details", new { rollNo = item.RollNo }, new { @class = "details-link" }) |
                         @Html.ActionLink("Delete", "Delete", new { rollNo = item.RollNo })
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+    <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

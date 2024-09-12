@@ -23,7 +23,7 @@ namespace CourseApp.Controllers
         public async Task<ActionResult> Details(string rollNo)
         {
             Student student = await client.GetFromJsonAsync<Student>("" + rollNo);
-            return PartialView("Details", student);
+            return PartialView("Details",student);
         }
 
         public ActionResult Create()
