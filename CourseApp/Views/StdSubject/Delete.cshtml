@@ -46,6 +46,7 @@
         @using (Html.BeginForm("Delete", "StdSubject", FormMethod.Post, new { id = "deleteForm" }))
         {
             @Html.HiddenFor(model => model.SubjectId)
+            @Html.HiddenFor(model => model.RollNo)
             @Html.AntiForgeryToken()
 
             <div class="form-actions">
@@ -61,7 +62,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '/StdSubject/Delete/?param1 = '+$('#RollNo').val()+ '&param2=' + $('#SubjectId').val(),
+                    url: '/StdSubject/Delete/?param1='+$('#RollNo').val()+ '&param2=' + $('#SubjectId').val(),
                     data: $(this).serialize(),
                     success: function (response) {
                         if (response.success) {

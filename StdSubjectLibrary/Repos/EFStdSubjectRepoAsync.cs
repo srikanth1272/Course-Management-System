@@ -42,7 +42,7 @@ namespace StdSubjectLibrary.Repos
         public async Task DeleteStudentSubject(string RollNo, string SubjectId)
         {
             await con.OpenAsync();
-            cmd.CommandText = "Delete from StdSubject where RollNo = @RollNo and SujectId = @SubjectId";
+            cmd.CommandText = "Delete from StdSubject where RollNo = @RollNo and SubjectId = @SubjectId";
             cmd.Parameters.AddWithValue("@RollNo", RollNo);
             cmd.Parameters.AddWithValue("@SubjectId", SubjectId);
             await cmd.ExecuteNonQueryAsync();
