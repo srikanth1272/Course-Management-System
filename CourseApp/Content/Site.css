@@ -5,17 +5,9 @@
     padding-right: 15px;
    
 }
-.navbar-nav {
-    display: flex;
-    align-items: center;
-    position: absolute; /* Position absolutely within the parent container */
-    right: 0; /* Align to the right side */
-    top: 0; /* Align to the top or adjust as needed */
-    z-index: 1000; /* Ensure it is on top */
+ul::marker, li::marker {
+    content: none; /* Remove any default content */
 }
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
 .dl-horizontal dt {
     white-space: normal;
 }
