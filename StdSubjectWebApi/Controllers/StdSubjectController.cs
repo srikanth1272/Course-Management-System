@@ -2,6 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using StdSubjectLibrary.Models;
 using StdSubjectLibrary.Repos;
+using SubjectLibrary.Repos;
+using StudentLibrary.Repos;
+using StudentLibrary.Models;
+using SubjectLibrary.Models;
 
 
 namespace StdSubjectWebApi.Controllers
@@ -11,9 +15,13 @@ namespace StdSubjectWebApi.Controllers
     public class StdSubjectController : ControllerBase
     {
         IStdSubjectRepoAsync repo;
-        public StdSubjectController(IStdSubjectRepoAsync repository)
+        IStudentRepoAsync std;
+        ISubjectRepoAsync sub;
+        public StdSubjectController(IStdSubjectRepoAsync repository, IStudentRepoAsync std1, ISubjectRepoAsync sub1)
         {
             repo = repository;
+            std = std1;
+            sub = sub1;
         }
         [HttpGet]
         public async Task<ActionResult> GetAllStudentsSubjects()
@@ -21,7 +29,32 @@ namespace StdSubjectWebApi.Controllers
             List<StdSubject> stdSubjects = await repo.GetAllStudentsSubjects();
             return Ok(stdSubjects);
         }
-
+        [HttpGet("student/{rollNo}")]
+        public async Task<ActionResult> GetStudent(string rollNo)
+        {
+            try
+            {
+                Student student = await std.GetStudent(rollNo);
+                return Ok(student);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+        [HttpGet("subject/{subjectId}")]
+        public async Task<ActionResult> GetSubject(string subjectId)
+        {
+            try
+            {
+                Subject subject = await sub.GetSubject(subjectId);
+                return Ok(subject);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
         [HttpGet("{rollNo}/{subjectId}")]
         public async Task<ActionResult> GetStudentSubject(string rollNo, string subjectId)
         {

@@ -19,21 +19,33 @@ namespace CourseApp.Controllers
             List<StdSubject> stdSubjects = await client.GetFromJsonAsync<List<StdSubject>>("");
             return View(stdSubjects);
         }
+        public async Task<ActionResult> Student(string rollNo)
+        {
+            Student student = await client.GetFromJsonAsync<Student>("student/" + rollNo);
+            return PartialView(student);
+        }
+        public async Task<ActionResult> Subject(string subjectId)
+        {
+            Subject subject = await client.GetFromJsonAsync<Subject>("subject/" + subjectId);
+            return PartialView(subject);
+        }
+
+
         public async Task<ActionResult> BySemister(string RollNo, int Semister)
         {
             List<StdSubject> stdSubjects = await client.GetFromJsonAsync<List<StdSubject>>($"BySemister/{RollNo}/{Semister}");
-            return View(stdSubjects);
+            return PartialView(stdSubjects);
         }
-        public async Task<ActionResult> ByRollNo(string RollNo)
-        {
-            List<StdSubject> stdSubjects = await client.GetFromJsonAsync<List<StdSubject>>($"ByRollNo/{RollNo}/");
-            return View(stdSubjects);
-        }
+        //public async Task<ActionResult> ByRollNo(string RollNo)
+        //{
+        //    List<StdSubject> stdSubjects = await client.GetFromJsonAsync<List<StdSubject>>($"ByRollNo/{RollNo}/");
+        //    return View(stdSubjects);
+        //}
 
         public async Task<ActionResult> Details(string rollNo,string subjectId)
         {
             StdSubject stdSubject = await client.GetFromJsonAsync<StdSubject>($"{rollNo}/{subjectId}");
-            return View("Details", stdSubject);
+            return PartialView("Details", stdSubject);
         }
 
         public async Task<ActionResult> Create()
@@ -57,7 +69,7 @@ namespace CourseApp.Controllers
             StdSubject stdSubject = await client.GetFromJsonAsync<StdSubject>($"{rollNo}/{subjectId}");
             var semister = Helper.GetSemisters();
             ViewBag.Semister = semister;
-            return View(stdSubject);
+            return PartialView(stdSubject);
         }
 
 
@@ -66,7 +78,7 @@ namespace CourseApp.Controllers
         public async Task<ActionResult> Delete(string rollNo, string subjectId)
         {
             StdSubject stdSubject = await client.GetFromJsonAsync<StdSubject>($"{rollNo}/{subjectId}");
-            return View(stdSubject);
+            return PartialView(stdSubject);
         }
 
 

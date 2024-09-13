@@ -74,7 +74,7 @@ $(document).ready(function () {
                         success: function () {
                             toastr.success("Registered Successfully and Logged In.")
                            
-                            setTimeout(function () { window.location.href = "/home"; }, 1000);
+                            setTimeout(function () { window.location.href = "/home/Index"; }, 1000);
                         }
                     });
                 },
@@ -130,7 +130,7 @@ $(document).ready(function () {
                         contentType: 'application/json',
                         success: function () {
                             toastr.success("Logged In Successfully")
-                            setTimeout(function () { window.location.href = "/home"; }, 1000);
+                            setTimeout(function () { window.location.href = "/Home/Index"; }, 1000);
                         }
                     });
                 },

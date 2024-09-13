@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <style>
+        .dl-horizontal dt {
+            float: left;
+            width: 150px;
+            clear: left;
+            font-weight: bold;
+        }
+
+        .dl-horizontal dd {
+            margin-left: 160px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 
 <body class="body">
@@ -24,14 +37,14 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.SubjectId)
+             :   @Html.DisplayFor(model => model.SubjectId)
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.Title)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Title)
+             :   @Html.DisplayFor(model => model.Title)
             </dd>
 
             <dt>
@@ -39,7 +52,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.TotalClasses)
+             :   @Html.DisplayFor(model => model.TotalClasses)
             </dd>
 
             <dt>
@@ -47,7 +60,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Credits)
+             :   @Html.DisplayFor(model => model.Credits)
             </dd>
 
         </dl>
@@ -59,7 +72,6 @@
 
             <div class="form-actions">
                 <input type="submit" value="Delete" class="btn btn-danger" />
-                @Html.ActionLink("Back to List", "Index")
             </div>
         }
     </div>

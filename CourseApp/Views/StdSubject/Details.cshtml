@@ -5,7 +5,19 @@
 }
 
 <h2>Details</h2>
+<style>
+    .dl-horizontal dt {
+        float: left;
+        width: 150px;
+        clear: left;
+        font-weight: bold;
+    }
 
+    .dl-horizontal dd {
+        margin-left: 160px;
+        margin-bottom: 10px;
+    }
+</style>
 <div>
     <h4>StdSubject</h4>
     <hr />
@@ -15,28 +27,25 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RollNo)
+         :   @Html.DisplayFor(model => model.RollNo)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SubjectId)
+         :   @Html.DisplayNameFor(model => model.SubjectId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SubjectId)
+         :   @Html.DisplayFor(model => model.SubjectId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Semister)
+         :  @Html.DisplayNameFor(model => model.Semister)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Semister)
+         :  @Html.DisplayFor(model => model.Semister)
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

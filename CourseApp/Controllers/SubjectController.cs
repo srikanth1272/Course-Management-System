@@ -23,7 +23,7 @@ namespace CourseApp.Controllers
         public async Task<ActionResult> Details(string subjectId)
         {
             Subject subject = await client.GetFromJsonAsync<Subject>("" +subjectId);
-            return PartialView("Details", subject);
+            return PartialView(subject);
         }
 
         public ActionResult Create()
@@ -35,7 +35,7 @@ namespace CourseApp.Controllers
         public async Task<ActionResult> Edit(string subjectId)
         {
             Subject subject = await client.GetFromJsonAsync<Subject>(""+subjectId);
-            return View(subject);
+            return PartialView(subject);
         }
 
        
@@ -44,7 +44,7 @@ namespace CourseApp.Controllers
         public async Task<ActionResult> Delete(string subjectId)
         {
             Subject subject = await client.GetFromJsonAsync<Subject>("" + subjectId);
-            return View(subject);
+            return PartialView(subject);
         }
 
        

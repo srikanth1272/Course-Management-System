@@ -1,5 +1,7 @@
 
 using StdSubjectLibrary.Repos;
+using StudentLibrary.Repos;
+using SubjectLibrary.Repos;
 
 namespace StdSubjectWebApi
 {
@@ -16,6 +18,9 @@ namespace StdSubjectWebApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IStdSubjectRepoAsync,EFStdSubjectRepoAsync>();
+            builder.Services.AddScoped<IStudentRepoAsync, EFStudentRepoAsync>();
+            builder.Services.AddScoped<ISubjectRepoAsync, EFSubjectRepoAsync>();
+          
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin",

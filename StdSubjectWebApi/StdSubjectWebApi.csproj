@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StdSubjectLibrary\StdSubjectLibrary.csproj" />
+    <ProjectReference Include="..\StudentLibrary\StudentLibrary.csproj" />
+    <ProjectReference Include="..\SubjectWebApi\SubjectWebApi.csproj" />
   </ItemGroup>
 
 </Project>

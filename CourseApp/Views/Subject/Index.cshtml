@@ -10,14 +10,38 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src=" https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
-   
+    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        var js = jQuery.noConflict();
+        js(document).ready(function () {
+            js('#myTable').DataTable();
+            js('#myTable').on('click', 'a.delete-link,a.details-link, a.Edit-link,a.create-link', function (e) {
+                e.preventDefault();
+
+                var url = js(this).attr('href');
+
+                js.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (result) {
+                        js('#detailsModal .modal-body').html(result);
+                        js('#detailsModal').modal('show');
+                    },
+                    error: function () {
+                        alert('Error loading details');
+                    }
+                });
+            });
+        });
+    </script><!-- Added Bootstrap JS -->
 </head>
 <body class="body">
     <h2>Index</h2>
 
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "Create", new { @class = "create-link" })
     </p>
     <table id="myTable" class="table table-bordered table-striped">
         <thead>
@@ -38,22 +62,25 @@
                     <td>@Html.DisplayFor(modelItem => item.TotalClasses)</td>
                     <td>@Html.DisplayFor(modelItem => item.Credits)</td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { subjectId = item.SubjectId }) |
-                        @Html.ActionLink("Details", "Details", new { subjectId = item.SubjectId }) |
-                        @Html.ActionLink("Delete", "Delete", new { subjectId = item.SubjectId })
+                        @Html.ActionLink("Edit", "Edit", new { subjectId = item.SubjectId }, new { @class = "Edit-link" }) |
+                        @Html.ActionLink("Details", "Details", new { subjectId = item.SubjectId }, new { @class = "details-link" }) |
+                        @Html.ActionLink("Delete", "Delete", new { subjectId = item.SubjectId }, new { @class = "delete-link" })
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    
-    <script type="text/javascript">
-        var js = jQuery.noConflict();
-        js(document).ready(function () {
-            js('#myTable').DataTable({
 
-            });
-        });
-    </script>
+    <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

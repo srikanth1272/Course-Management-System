@@ -23,7 +23,7 @@ namespace CourseApp.Controllers
         public async Task<ActionResult> Details(string rollNo)
         {
             Student student = await client.GetFromJsonAsync<Student>("" + rollNo);
-            return PartialView("Details",student);
+            return PartialView(student);
         }
 
         public ActionResult Create()
@@ -37,7 +37,7 @@ namespace CourseApp.Controllers
         public async Task<ActionResult> Edit(string rollNo)
         {
             Student student = await client.GetFromJsonAsync<Student>("" + rollNo);
-            return View(student);
+            return PartialView(student);
         }
 
 
@@ -46,7 +46,7 @@ namespace CourseApp.Controllers
         public async Task<ActionResult> Delete(string rollNo)
         {
             Student student = await client.GetFromJsonAsync<Student>("" + rollNo);
-            return View(student);
+            return PartialView(student);
         }
 
 

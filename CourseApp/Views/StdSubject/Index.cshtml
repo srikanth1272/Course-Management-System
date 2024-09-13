@@ -8,12 +8,28 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src=" https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         var js = jQuery.noConflict();
         js(document).ready(function () {
-            js('#myTable').DataTable({
+            js('#myTable').DataTable();
+            js('#myTable').on('click', 'a.subject-link,a.student-link,a.semister-link, a.Edit-link,a.delete-link,a.create-link', function (e) {
+                e.preventDefault();
 
+                var url = js(this).attr('href');
+
+                js.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (result) {
+                        js('#detailsModal .modal-body').html(result);
+                        js('#detailsModal').modal('show');
+                    },
+                    error: function () {
+                        alert('Error loading details');
+                    }
+                });
             });
         });
     </script>
@@ -22,7 +38,7 @@
     <h2>Index</h2>
 
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "Create", new { @class = "create-link" })
     </p>
     <table id="myTable" class="table table-bordered table-striped">
         <thead>
@@ -53,15 +69,25 @@
                         @Html.DisplayFor(modelItem => item.Semister)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { RollNo = item.RollNo, SubjectId = item.SubjectId }) |
-                        @Html.ActionLink("BySemister", "BySemister", new { RollNo = item.RollNo, Semister = item.Semister }) |
-                        @Html.ActionLink("ByRollNo", "ByRollNo", new { RollNo = item.RollNo }) |
-                        @Html.ActionLink("Delete", "Delete", new { RollNo = item.RollNo, SubjectId = item.SubjectId })
+                        @Html.ActionLink("Student", "Student", new { RollNo = item.RollNo }, new { @class = "student-link" }) |
+                        @Html.ActionLink("Subject", "Subject", new { SubjectId = item.SubjectId  }, new { @class = "subject-link" }) |
+                        @Html.ActionLink("Edit", "Edit", new { RollNo = item.RollNo, SubjectId = item.SubjectId }, new { @class = "Edit-link" }) |
+                        @Html.ActionLink("BySemister", "BySemister", new { RollNo = item.RollNo, Semister = item.Semister }, new { @class = "semister-link" }) |
+                        @Html.ActionLink("Delete", "Delete", new { RollNo = item.RollNo, SubjectId = item.SubjectId }, new { @class = "delete-link" })
                     </td>
                 </tr>
             }
         </tbody>
 
     </table>
+    <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

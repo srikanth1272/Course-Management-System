@@ -9,23 +9,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src=" https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         var js = jQuery.noConflict();
         js(document).ready(function () {
             js('#myTable').DataTable();
-
-            $('#myTable').on('click', 'a.details-link', function (e) {
+            js('#myTable').on('click', 'a.details-link, a.Edit-link,a.delete-link,a.create-link', function (e) {
                 e.preventDefault();
 
-                var url = $(this).attr('href');
+                var url = js(this).attr('href');
 
                 js.ajax({
                     url: url,
                     type: 'GET',
                     success: function (result) {
-                        $('#detailsModal .modal-body').html(result);
-                        $('#detailsModal').modal('show');
+                        js('#detailsModal .modal-body').html(result);
+                        js('#detailsModal').modal('show');
                     },
                     error: function () {
                         alert('Error loading details');
@@ -40,7 +40,7 @@
 <body class="body">
     <h2>Index</h2>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "Create", new { @class = "create-link" })
     </p>
     <table id="myTable" class="table table-bordered table-striped">
         <thead>
@@ -96,9 +96,9 @@
                         @Html.DisplayFor(modelItem => item.Address)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { rollNo = item.RollNo }) |
+                        @Html.ActionLink("Edit", "Edit", new { rollNo = item.RollNo }, new { @class = "Edit-link" }) |
                         @Html.ActionLink("Details", "Details", new { rollNo = item.RollNo }, new { @class = "details-link" }) |
-                        @Html.ActionLink("Delete", "Delete", new { rollNo = item.RollNo })
+                        @Html.ActionLink("Delete", "Delete", new { rollNo = item.RollNo }, new { @class = "delete-link" })
                     </td>
                 </tr>
             }
