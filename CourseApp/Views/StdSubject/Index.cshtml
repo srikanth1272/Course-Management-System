@@ -5,11 +5,6 @@
 }
 <html>
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         var js = jQuery.noConflict();
         js(document).ready(function () {
@@ -32,13 +27,16 @@
                 });
             });
         });
+
     </script>
+
 </head>
+        
 <body class="body">
-    <h2>Index</h2>
+    <center><h2>STUDENT SUBJECTS</h2></center>
 
     <p>
-        @Html.ActionLink("Create New", "Create", new { @class = "create-link" })
+        @Html.ActionLink("Add Student Subject", "Create", new { }, new { @class = " btn btn-primary" })
     </p>
     <table id="myTable" class="table table-bordered table-striped">
         <thead>
@@ -61,19 +59,23 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.RollNo)
+                        <a href="@Url.Action("Student", new { RollNo = item.RollNo })" class="student-link" title="View Details">
+                            <i class="fa-solid fa-caret-up" style="color:black"></i> 
+                        </a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.SubjectId)
+                        <a href="@Url.Action("Subject", new { SubjectId = item.SubjectId })" class="subject-link" title="View Details">
+                            <i class="fa-solid fa-caret-up" style="color:black"></i>
+                        </a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Semister)
                     </td>
                     <td>
-                        @Html.ActionLink("Student", "Student", new { RollNo = item.RollNo }, new { @class = "student-link" }) |
-                        @Html.ActionLink("Subject", "Subject", new { SubjectId = item.SubjectId  }, new { @class = "subject-link" }) |
-                        @Html.ActionLink("Edit", "Edit", new { RollNo = item.RollNo, SubjectId = item.SubjectId }, new { @class = "Edit-link" }) |
-                        @Html.ActionLink("BySemister", "BySemister", new { RollNo = item.RollNo, Semister = item.Semister }, new { @class = "semister-link" }) |
-                        @Html.ActionLink("Delete", "Delete", new { RollNo = item.RollNo, SubjectId = item.SubjectId }, new { @class = "delete-link" })
+                        @Html.ActionLink("Edit", "Edit", new { RollNo = item.RollNo, SubjectId = item.SubjectId }, new { @class = "Edit-link btn btn-primary" }) |
+                        @Html.ActionLink("BySemister", "BySemister", new { RollNo = item.RollNo, Semister = item.Semister }, new { @class = "semister-link btn btn-primary" }) |
+                        @Html.ActionLink("Delete", "Delete", new { RollNo = item.RollNo, SubjectId = item.SubjectId }, new { @class = "delete-link btn btn-danger" })
                     </td>
                 </tr>
             }

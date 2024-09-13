@@ -66,7 +66,7 @@ $(document).ready(function () {
             isValid = false;
         }
         var DOB = $("#DOB").val();
-        var dob = new Date(DOB);
+        var dob = new Date(DOB );       
         if (DOB === '') {
             $('#dobError').text('Please enter date of birth.'); 
             isValid = false;
