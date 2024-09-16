@@ -144,3 +144,15 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+   
+    $("#loader").show();
+    $("#content").hide();
+
+    
+    setTimeout(function () {
+        
+        $("#loader").hide();
+        $("#content").show();
+    }, 1000); 
+});
