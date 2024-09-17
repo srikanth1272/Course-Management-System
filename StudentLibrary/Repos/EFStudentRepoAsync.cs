@@ -107,6 +107,42 @@ namespace StudentLibrary.Repos
             return student;
         }
 
+        public async Task<List<Student>> GetStudentByDates(DateOnly sdate, DateOnly edate)
+        {
+            try
+            {
+                List<Student> students = new List<Student>();
+                cmd.CommandText = "Select * from Student where DOB >= @sdate and DOB <= @edate";
+                cmd.Parameters.AddWithValue("@sdate", sdate);
+                cmd.Parameters.AddWithValue("@edate", edate);
+                await con.OpenAsync();
+                SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    Student student = new()
+                    {
+                        RollNo = (string)reader["RollNo"],
+                        FirstName = (string)reader["FirstName"],
+                        LastName = (string)reader["LastName"],
+                        DOB = (DateTime)reader["DOB"],
+                        Email = (string)reader["email"],
+                        Phone = (string)reader["phone"],
+                        Address = (string)reader["address"]
+
+                    };
+                    students.Add(student);
+                }
+                await con.CloseAsync();
+                return students;
+            }
+            catch(Exception e)
+            {
+                await con.CloseAsync();
+                throw new StudentException(e.Message);
+
+            }
+        }
+
         public async Task UpdateStudent(string RollNo, Student student)
         {
             try

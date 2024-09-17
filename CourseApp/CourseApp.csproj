@@ -174,6 +174,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CollectDates.cs" />
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\StdSubject.cs" />
     <Compile Include="Models\Student.cs" />
@@ -203,6 +204,7 @@
     <Content Include="Content\Images\3.jfif" />
     <Content Include="Content\Images\4.jfif" />
     <Content Include="Content\Images\5.jfif" />
+    <Content Include="Content\Images\loader.gif" />
     <Content Include="Content\Images\stdsub.png" />
     <Content Include="Content\Images\student.png" />
     <Content Include="Content\Images\subject.png" />
@@ -260,6 +262,7 @@
     <Content Include="Views\StdSubject\Delete.cshtml" />
     <Content Include="Views\StdSubject\Student.cshtml" />
     <Content Include="Views\StdSubject\Subject.cshtml" />
+    <Content Include="Views\Student\CollectDates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -20,6 +20,15 @@ namespace StudentWebApi.Controllers
             return Ok(students);
         }
 
+        [HttpGet("{sdate}/{edate}")]
+        public async Task<ActionResult> GetStudentByDates(DateTime sdate , DateTime edate)
+        {
+            DateOnly sdate1 = DateOnly.FromDateTime(sdate);
+            DateOnly edate1 = DateOnly.FromDateTime(edate);
+
+            List<Student> students = await repo.GetStudentByDates(sdate1,edate1);
+            return Ok(students);
+        }
         [HttpGet("{rollNo}")]
         public async Task<ActionResult> GetStudent(string rollNo)
         {

@@ -20,6 +20,17 @@ namespace CourseApp.Controllers
             return View(students);
         }
 
+        public ActionResult CollectDates()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CollectDates(CollectDates collectDates)
+        {
+            List<Student> students = await client.GetFromJsonAsync<List<Student>>($"{collectDates.Sdate.ToString("yyyy-MM-dd")}/{collectDates.Edate.ToString("yyyy-MM-dd")}");
+            return View("Index",students);
+        }
         public async Task<ActionResult> Details(string rollNo)
         {
             Student student = await client.GetFromJsonAsync<Student>("" + rollNo);

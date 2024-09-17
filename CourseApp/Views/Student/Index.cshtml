@@ -10,7 +10,7 @@
         var js = jQuery.noConflict();
         js(document).ready(function () {
             js('#myTable').DataTable();
-            js('#myTable').on('click', 'a.details-link, a.Edit-link,a.delete-link', function (e) {
+            js('#myTable, #mydates').on('click', 'a.details-link, a.Edit-link,a.delete-link,a.CollectDates-link', function (e) {
                 e.preventDefault();
 
                 var url = js(this).attr('href');
@@ -29,14 +29,33 @@
             });
         });
     </script>
-
 </head>
 
 <body class="body">
     <center><h2>STUDENTS</h2></center>
-    <p>
-        @Html.ActionLink("Add Student", "Create", new {  }, new { @class = " btn btn-primary" })
-    </p>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    @Html.ActionLink("Add Student", "Create", new { }, new { @class = "btn btn-primary" })
+                </p>
+            </div>
+            <div class="col-md-6 text-right">
+                <div class="d-inline-block mr-2">
+                    <p class="mb-0" id="mydates">
+                        @Html.ActionLink("Date Filters", "CollectDates", new { }, new { @class = "CollectDates-link btn btn-primary" })
+                    </p>
+                </div>
+                <div class="d-inline-block">
+                    <p class="mb-0">
+                        @Html.ActionLink("Show All", "Index", new { }, new { @class = "btn btn-primary" })
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <table id="myTable" class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -103,7 +122,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    
+
                 </div>
             </div>
         </div>
