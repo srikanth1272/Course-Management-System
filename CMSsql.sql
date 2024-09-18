@@ -3,9 +3,11 @@
 use UserDB
 
 create table Users(
-email varchar(30) primary key,
+UserId int Identity primary key, 
+email varchar(30) Unique not null,
 username varchar(20) not null,
-password varchar(255) not null
+password varchar(255) not null,
+Role varchar(10) 
 )
 
 

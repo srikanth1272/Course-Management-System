@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CourseApp.Models.StdSubject>
+﻿@model IEnumerable<CourseApp.Models.User>
 
 @{
     ViewBag.Title = "Index";
@@ -8,8 +8,9 @@
     <script type="text/javascript">
         var js = jQuery.noConflict();
         js(document).ready(function () {
-            js('#myTable').DataTable();
-            js('#myTable').on('click', 'a.subject-link,a.student-link,a.semister-link, a.Edit-link,a.delete-link,a.create-link', function (e) {
+            new DataTable('#myTable');
+
+            js('#myTable').on('click', 'a.details-link, a.Edit-link,a.delete-link', function (e) {
                 e.preventDefault();
 
                 var url = js(this).attr('href');
@@ -27,28 +28,30 @@
                 });
             });
         });
-
     </script>
 
 </head>
-        
-<body class="body">
-    <center><h2>STUDENT SUBJECTS</h2></center>
 
-    <p>
-        @Html.ActionLink("Add Student Subject", "Create", new { }, new { @class = " btn btn-primary" })
-    </p>
+<body>
+    <h2>Index</h2>
+
     <table id="myTable" class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.RollNo)
+                    @Html.DisplayNameFor(model => model.UserId)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.SubjectId)
+                    @Html.DisplayNameFor(model => model.Email)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Semister)
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Password)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Role)
                 </th>
                 <th></th>
             </tr>
@@ -58,35 +61,34 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RollNo)
-                        <a href="@Url.Action("Student", new { RollNo = item.RollNo })" class="student-link" title="View Details">
-                            <i class="fa-solid fa-caret-up" style="color:black"></i> 
-                        </a>
+                        @Html.DisplayFor(modelItem => item.UserId)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.SubjectId)
-                        <a href="@Url.Action("Subject", new { SubjectId = item.SubjectId })" class="subject-link" title="View Details">
-                            <i class="fa-solid fa-caret-up" style="color:black"></i>
-                        </a>
+                        @Html.DisplayFor(modelItem => item.Email)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Semister)
+                        @Html.DisplayFor(modelItem => item.UserName)
                     </td>
                     <td>
-                        <a href="@Url.Action("Edit", new { RollNo = item.RollNo , SubjectId = item.SubjectId })" class="Edit-link" title="Edit">
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { userId = item.UserId })" class="Edit-link" title="Edit">
                             <i class="fa-regular fa-pen-to-square" style="color:black"></i>
                         </a>
-                        <a href="@Url.Action("BySemister", new { RollNo = item.RollNo, Semister = item.Semister })" class="semister-link" title="BySemister">
-                            <i class="fa-solid fa-list" style="color:blue"></i>
+                        <a href="@Url.Action("Details", new {  userId = item.UserId})" class="details-link" title="Details">
+                            <i class="fa-regular fa-eye" style="color:blue"></i>
                         </a>
-                        <a href="@Url.Action("Delete", new {  RollNo = item.RollNo, SubjectId = item.SubjectId })" class="delete-link" title="Delete">
+                        <a href="@Url.Action("Delete", new {  userId = item.UserId })" class="delete-link" title="Delete">
                             <i class="fa-regular fa-trash-can" style="color:red"></i>
-                        </a>  
+                        </a>
                     </td>
                 </tr>
             }
         </tbody>
-
     </table>
     <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

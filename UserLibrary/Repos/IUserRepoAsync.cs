@@ -10,10 +10,11 @@ namespace UserLibrary.Repos
     public interface IUserRepoAsync
     {
         Task AddUserAsync(User user);
-        Task UpdateUserAsync(string email, string username);
-        Task DeleteUserAsync(string email);
-        Task<User> GetUserAsync(string email);
+        
+        Task DeleteUserAsync(int userId);
+        Task<User> GetUserAsync(int userId);
         Task<List<User>> GetAllUsersAsync();
-
+        Task UpdateUserAsync(int userId, string username);
+        Task<User> LoginAsync(string email);
     }
 }

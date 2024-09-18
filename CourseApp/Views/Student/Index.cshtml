@@ -9,7 +9,8 @@
     <script type="text/javascript">
         var js = jQuery.noConflict();
         js(document).ready(function () {
-            js('#myTable').DataTable();
+            new DataTable('#myTable');
+         
             js('#myTable, #mydates').on('click', 'a.details-link, a.Edit-link,a.delete-link,a.CollectDates-link', function (e) {
                 e.preventDefault();
 
@@ -29,6 +30,7 @@
             });
         });
     </script>
+   
 </head>
 
 <body class="body">
@@ -44,12 +46,14 @@
             <div class="col-md-6 text-right">
                 <div class="d-inline-block mr-2">
                     <p class="mb-0" id="mydates">
-                        @Html.ActionLink("Date Filters", "CollectDates", new { }, new { @class = "CollectDates-link btn btn-primary" })
+                        <a href="@Url.Action("CollectDates")" class="CollectDates-link btn btn-primary">
+                            <i class="fa-solid fa-filter"></i> Date Filters
+                        </a>
                     </p>
                 </div>
                 <div class="d-inline-block">
                     <p class="mb-0">
-                        @Html.ActionLink("Show All", "Index", new { }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("View All", "Index", new { }, new { @class = "btn btn-primary", @id= "show" })
                     </p>
                 </div>
             </div>
@@ -83,7 +87,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="index">
 
             @foreach (var item in Model)
             {
@@ -110,9 +114,15 @@
                         @Html.DisplayFor(modelItem => item.Address)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { rollNo = item.RollNo }, new { @class = "Edit-link btn btn-primary" }) |
-                        @Html.ActionLink("Details", "Details", new { rollNo = item.RollNo }, new { @class = "details-link btn btn-primary" }) |
-                        @Html.ActionLink("Delete", "Delete", new { rollNo = item.RollNo }, new { @class = "delete-link btn btn-danger" })
+                        <a href="@Url.Action("Edit", new { rollNo = item.RollNo })" class="Edit-link" title="Edit">
+                            <i class="fa-regular fa-pen-to-square" style="color:black"></i>
+                        </a>
+                        <a href="@Url.Action("Details", new { rollNo = item.RollNo })" class="details-link" title="Details">
+                            <i class="fa-regular fa-eye" style="color:blue"></i>
+                        </a>
+                        <a href="@Url.Action("Delete", new { rollNo = item.RollNo })" class="delete-link" title="Delete">
+                            <i class="fa-regular fa-trash-can"  style="color:red"></i>
+                        </a>
                     </td>
                 </tr>
             }

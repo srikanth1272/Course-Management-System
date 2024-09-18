@@ -15,12 +15,22 @@ namespace CourseApi.Controllers
             repo = repository;
         }
 
-        [HttpGet("{Email}")]
-        public async Task<ActionResult> GetUser(string Email)
+
+        [HttpGet]
+        public async Task<ActionResult> GetAll()
+        {
+            List<User> users = await repo.GetAllUsersAsync();
+            return Ok(users);
+        }
+
+
+
+        [HttpGet("{UserId}")]
+        public async Task<ActionResult> GetUser(int UserId)
         {
             try
             {
-                User user = await repo.GetUserAsync(Email);
+                User user = await repo.GetUserAsync(UserId);
                 return Ok(user);
             }
             catch (UserException ex)
@@ -45,12 +55,12 @@ namespace CourseApi.Controllers
             }
         }
 
-        [HttpPut("{Email}")]
-        public async Task<ActionResult> Update(string Email, User user)
+        [HttpPut("{userId}")]
+        public async Task<ActionResult> Update(int userId, User user)
         {
             try
             {
-                await repo.UpdateUserAsync(Email, user.UserName);
+                await repo.UpdateUserAsync(userId, user.UserName);
                 return Ok();
             }
             catch (UserException ex)
@@ -66,10 +76,10 @@ namespace CourseApi.Controllers
             user.Password = System.Convert.ToBase64String(hash1);
             try
             {
-                User user1 = await repo.GetUserAsync(user.Email);
+                User user1 = await repo.LoginAsync(user.Email);
                 if (user1.Password == user.Password)
                 {
-                    return Ok();
+                    return Ok(user1);
                 }
                 else
                 {

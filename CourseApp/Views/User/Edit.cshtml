@@ -3,44 +3,50 @@
 @{
     ViewBag.Title = "Edit";
 }
+<head>
+    <script src='@Url.Content("~/Scripts/stdSubjectValidation.js")' type='text/javascript'></script>
+</head>
+<body>
+   
+                @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @class = "form-horizontal",@id = "roleform"}))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Email)
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit User Name</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.HiddenFor(model => model.Email)
+                    <div class="form-horizontal" style="margin-left:15px">
 
-                <div class="form-horizontal" style="margin-left:15px">
+                        <hr />
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.UserId, new { @class = "form-control", @readOnly = "readonly" })
+                            </div>
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "email" })
+                            </div>
+                            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "username" })
+                            </div>
+                            @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.Role, new SelectList(new List<SelectListItem>
+                                {
+                                    new SelectListItem { Text = "Admin", Value = "Admin" },
+                                    new SelectListItem { Text = "Student", Value = "Student" }
+                                }, "Value", "Text"), "Select Role", new { @class = "form-control", @id = "roleDropdown" })
+                            </div>
 
-                    <hr />
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Save" class="btn btn-success" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-success" />
                         </div>
-                    </div>
-                </div>
-            }
-
-
-        </div>
-   </div>
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+                }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>

@@ -55,9 +55,15 @@
                     <td>@Html.DisplayFor(modelItem => item.TotalClasses)</td>
                     <td>@Html.DisplayFor(modelItem => item.Credits)</td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { subjectId = item.SubjectId }, new { @class = "Edit-link btn btn-primary" }) |
-                        @Html.ActionLink("Details", "Details", new { subjectId = item.SubjectId }, new { @class = "details-link btn btn-primary" }) |
-                        @Html.ActionLink("Delete", "Delete", new { subjectId = item.SubjectId }, new { @class = "delete-link btn btn-danger" })
+                        <a href="@Url.Action("Edit", new {  subjectId = item.SubjectId  })" class="Edit-link" title="Edit">
+                            <i class="fa-regular fa-pen-to-square" style="color:black"></i>
+                        </a>
+                        <a href="@Url.Action("Details", new {  subjectId = item.SubjectId  })" class="details-link" title="Details">
+                            <i class="fa-regular fa-eye" style="color:blue"></i>
+                        </a>
+                        <a href="@Url.Action("Delete", new {subjectId = item.SubjectId })" class="delete-link" title="Delete">
+                            <i class="fa-regular fa-trash-can" style="color:red"></i>
+                        </a>
                     </td>
                 </tr>
             }

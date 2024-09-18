@@ -25,10 +25,11 @@ namespace UserLibrary.Repos
             try
             {
                 await con.OpenAsync();
-                cmd.CommandText = "insert into Users values(@email,@username,@password)";
+                cmd.CommandText = "insert into Users values(@email,@username,@password,@role)";
                 cmd.Parameters.AddWithValue("@email", user.Email);
                 cmd.Parameters.AddWithValue("@username", user.UserName);
                 cmd.Parameters.AddWithValue("@password", user.Password);
+                cmd.Parameters.AddWithValue("@role", user.Role);
                 await cmd.ExecuteNonQueryAsync();
                 await con.CloseAsync();
             }
@@ -38,11 +39,11 @@ namespace UserLibrary.Repos
             }          
         }
 
-        public async Task DeleteUserAsync(string email)
+        public async Task DeleteUserAsync(int userId)
         {
             await con.OpenAsync();
-            cmd.CommandText = "Delete from Users where email = @email";
-            cmd.Parameters.AddWithValue("@email", email);
+            cmd.CommandText = "Delete from Users where userId = @userId";
+            cmd.Parameters.AddWithValue("@userId", userId);
             await cmd.ExecuteNonQueryAsync();
             await con.CloseAsync();
         }
@@ -56,9 +57,11 @@ namespace UserLibrary.Repos
             while(await reader.ReadAsync())
             {
                 User user = new User();
+                user.UserId = (int)reader["userId"];
                 user.Email = (string)reader["email"];
                 user.UserName = (string)reader["username"];
                 user.Password = (string)reader["PassWord"];
+                user.Role = (string)reader["Role"];
                 users.Add(user);
             }
             await con.CloseAsync();
@@ -66,18 +69,20 @@ namespace UserLibrary.Repos
 
         }
 
-        public async Task<User> GetUserAsync(string email)
+        public async Task<User> GetUserAsync(int userId)
         {
             User user = new User();
-            cmd.CommandText = "Select * from Users where email = @email";
-            cmd.Parameters.AddWithValue("@email", email);
+            cmd.CommandText = "Select * from Users where userId = @userId";
+            cmd.Parameters.AddWithValue("@userId", userId);
             await con.OpenAsync();
             SqlDataReader reader = await cmd.ExecuteReaderAsync();
             if (await reader.ReadAsync())
             {
-                user.Email = (string)reader["email"];   
+                user.UserId = (int)reader["userId"];
+                user.Email = (string)reader["email"];
                 user.UserName = (string)reader["username"];
                 user.Password = (string)reader["PassWord"];
+                user.Role = (string)reader["Role"];
                 await con.CloseAsync(); 
                 return user;
             }
@@ -88,14 +93,38 @@ namespace UserLibrary.Repos
             }
         }
 
-            public async Task UpdateUserAsync(string email, string username)
+        public async Task<User> LoginAsync(string email)
+        {
+            User user = new User();
+            cmd.CommandText = "Select * from Users where email = @email";
+            cmd.Parameters.AddWithValue("@email", email);
+            await con.OpenAsync();
+            SqlDataReader reader = await cmd.ExecuteReaderAsync();
+            if (await reader.ReadAsync())
+            {
+                user.UserId = (int)reader["userId"];
+                user.Email = (string)reader["email"];
+                user.UserName = (string)reader["username"];
+                user.Password = (string)reader["PassWord"];
+                user.Role = (string)reader["Role"];
+                await con.CloseAsync();
+                return user;
+            }
+            else
+            {
+                await con.CloseAsync();
+                throw new UserException("User Doesn't Exists");
+            }
+        }
+
+        public async Task UpdateUserAsync(int userId, string username)
         {
             try
             {
                 await con.OpenAsync();
                 cmd.CommandText = "update Users set Username = @username where email = @email";
                 cmd.Parameters.AddWithValue("@username", username);
-                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@userId", userId);
                 await cmd.ExecuteNonQueryAsync();
                 await con.CloseAsync();
             }
@@ -104,7 +133,6 @@ namespace UserLibrary.Repos
                 await con.CloseAsync();
                 throw new UserException(ex.Message);
             }
-
         }
     }
 }

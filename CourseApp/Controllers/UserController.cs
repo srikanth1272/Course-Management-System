@@ -1,5 +1,6 @@
 ﻿using CourseApp.Models;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Reflection;
@@ -22,36 +23,32 @@ namespace CourseApp.Controllers
         {
             return View();
         }
+
+        public async Task<ActionResult> Index()
+        {
+            List<User> users = await client.GetFromJsonAsync<List<User>>("");
+            return View(users);
+        }
       
         [HttpPost]
-        public void Authenticate(String Email)
+        public void Authenticate(int userId, String Role)
         {
-            Session["Email"] = Email;
+            Session["UserId"] = userId;
+            Session["Role"] = Role;
         }
-        public async Task<ActionResult> Details(string Email)
+        public async Task<ActionResult> Details(int userId)
         {
-            User user = await client.GetFromJsonAsync<User>(""+Email);
-            return View(user);
-        }
-
-        [Route("User/Edit/{Email}")]
-        public ActionResult Edit()
-        {
-            return View();
+            User user = await client.GetFromJsonAsync<User>(""+userId);
+            return PartialView(user);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Route("User/Edit/{Email}")]
-        public async Task<ActionResult> Edit(string Email, User user)
+        [Route("User/Edit/{UserId}")]
+        public async Task<ActionResult> Edit(int userId)
         {
-            user.Password = " ";
-            var response = await client.PutAsJsonAsync($"{Email}", user);
-            if (response.IsSuccessStatusCode)
-                return RedirectToAction(nameof(Details), new { Email = Email });
-            else
-                return View();
+             User user = await client.GetFromJsonAsync<User>("" + userId);
+             return PartialView(user);
         }
+
 
         public ActionResult Logout()
         {
