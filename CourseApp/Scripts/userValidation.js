@@ -59,11 +59,12 @@ $(document).ready(function () {
             $('#confirmPasswordError').text('Password Does not Match. Please Check');
             isValid = false;
         }
+        var role = "student";
         if (isValid) {
             $.ajax({
                 type: "POST",
                 url: "http://localhost:5299/api/User/",
-                data: JSON.stringify({ "email": email, "username": username, "password": password }),
+                data: JSON.stringify({ "email": email, "username": username, "password": password, "role": role }),
                 contentType: 'application/json',
                 success: function (response) {
                     $.ajax({
