@@ -37,7 +37,10 @@ namespace CourseApi.Controllers
             {
                 return NotFound(ex.Message);
             }
+        
         }
+ 
+
         [HttpPost]
         public async Task<ActionResult> Insert(User user)
         {
@@ -60,7 +63,7 @@ namespace CourseApi.Controllers
         {
             try
             {
-                await repo.UpdateUserAsync(userId, user.UserName);
+                await repo.UpdateUserAsync(userId, user);
                 return Ok();
             }
             catch (UserException ex)
@@ -87,6 +90,20 @@ namespace CourseApi.Controllers
                 }
             }
             catch (UserException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{userId}")]
+        public async Task<ActionResult> Delete(int userId)
+        {
+            try
+            {
+                await repo.DeleteUserAsync(userId);
+                return Ok();
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

@@ -1,0 +1,102 @@
+﻿@model CourseApp.Models.User
+
+@{
+    ViewBag.Title = "Delete";
+}
+<head>
+
+    <style>
+        .dl-horizontal dt {
+            float: left;
+            width: 150px;
+            clear: left;
+            font-weight: bold;
+        }
+
+        .dl-horizontal dd {
+            margin-left: 160px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body class="body">
+    <h2>Delete</h2>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>User</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.UserId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserId)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Role)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Role)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm("Delete", "User", FormMethod.Post, new { id = "deleteForm" }))
+        {
+            @Html.HiddenFor(model => model.UserId)
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+
+            </div>
+        }
+    </div>
+    <script>
+    $(document).ready(function () {
+        $('#deleteForm').on('submit', function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '/User/Delete/' + $('#UserId').val(),
+                data: $(this).serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        toastr.success(response.message);
+                        setTimeout(function () {
+                            window.location.href = '/User/Index';
+                        }, 1000)
+                    }
+                    else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function (jqXHR) {
+                    errorMessage = jqXHR.responseText;
+                    toastr.error(errorMessage);
+                }
+            });
+        });
+    });
+    </script>
+</body>

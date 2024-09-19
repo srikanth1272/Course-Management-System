@@ -44,6 +44,28 @@ namespace StudentLibrary.Repos
             }
         }
 
+        public async Task<Student> CheckStudent(string email)
+        {
+    
+            Student student = new();
+            await con.OpenAsync();
+            cmd.CommandText = "Select * from Student where email = '" + email + "'";
+            SqlDataReader reader = await cmd.ExecuteReaderAsync();
+            if (await reader.ReadAsync())
+            {
+                student.RollNo = (string)reader["RollNo"];
+                student.FirstName = (string)reader["FirstName"];
+                student.LastName = (string)reader["LastName"];
+                student.DOB = (DateTime)reader["DOB"];
+                student.Email = (string)reader["email"];
+                student.Phone = (string)reader["phone"];
+                student.Address = (string)reader["address"];
+            }
+            await con.CloseAsync();
+            return student;
+
+        }
+
         public async Task DeleteStudent(string RollNo)
         {
             try

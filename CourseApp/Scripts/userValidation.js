@@ -86,22 +86,8 @@ $(document).ready(function () {
             });
         }
     });
-});
-
-$(document).ready(function () {
-    $('#email').blur(function () {
-        var email = $(this).val();
-        if (email === '')
-            $('#emailError').text('Email is required');
-    });
-    $('#password').blur(function () {
-        var password = $("#password").val();
-        if (password === '')
-            $('#passwordError').text('Password is required');
-    });
-
     $('#LoginForm').on('submit', function (event) {
-        event.preventDefault();  
+        event.preventDefault();
 
         $('.error').text('');
         var isValid = true;
@@ -121,7 +107,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "http://localhost:5299/api/User/Login",
-                data: JSON.stringify({  "email": email,"username": "", "password": password,"role":"" }),
+                data: JSON.stringify({ "email": email, "username": "", "password": password, "role": "" }),
                 contentType: 'application/json',
                 success: function (result) {
                     $.ajax({
@@ -136,7 +122,52 @@ $(document).ready(function () {
                     });
                 },
                 error: function (jqXHR) {
-                 
+
+                    errorMessage = jqXHR.responseText;
+                    toastr.error(errorMessage);
+                }
+            });
+        }
+    });
+    $('#roleform').on('submit', function (event) {
+        event.preventDefault();
+
+        $('.error').text('');
+        var isValid = true;
+
+        var userid = $('#userid').val();
+        var username = $("#username").val();
+        if (username === '') {
+            $('#userNameError').text('Username is Required');
+            isValid = false;
+        }
+
+        var email = $("#email").val();
+        if (email === '') {
+            $('#emailError').text('Email is required');
+            isValid = false;
+        }
+        var role = $("#role").val();
+        if (role === "Student") {
+            isValid = false;
+            $('#roleError').text('Cannot remove Admin');
+        }
+        if (role === '') {
+            $('#roleError').text('Assign a Role');
+            isValid = false;
+        }
+        if (isValid) {
+            $.ajax({
+                type: "PUT",
+                url: "http://localhost:5299/api/User/"+userid,
+                data: JSON.stringify({ "userid": userid , "email": email, "username": username, "password": "", "role": role }),
+                contentType: 'application/json',
+                success: function () {    
+                            toastr.success("Assigned Role Successfully")
+                            setTimeout(function () { window.location.href = "/User/Index"; }, 1000);                      
+                },
+                error: function (jqXHR) {
+
                     errorMessage = jqXHR.responseText;
                     toastr.error(errorMessage);
                 }
@@ -144,6 +175,8 @@ $(document).ready(function () {
         }
     });
 });
+
+
 
 //$(document).ready(function () {
 

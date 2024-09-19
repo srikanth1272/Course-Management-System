@@ -16,19 +16,36 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script type="text/javascript">
+        var js = jQuery.noConflict();
+        js(document).ready(function () {
+            js('#myTable').DataTable();
+            js('#profile').on('click', 'a.profile-link', function (e) {
+                e.preventDefault();
+
+                var url = js(this).attr('href');
+
+                js.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (result) {
+                        js('#detailsModal .modal-body').html(result);
+                        js('#detailsModal').modal('show');
+                    },
+                    error: function () {
+                        alert('Error loading details');
+                    }
+                });
+            });
+        });
+
+    </script>
 
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
 
-
-    @*@if (Session["Email"] == null)
-        {
-            <ul class="navbar-nav mr-auto">
-                <li>@Html.ActionLink("Login", "Login", "User", new { area = "" }, new { @class = "nav-link btn btn-primary" })</li>
-            </ul>
-        }*@
     @if (Session["UserId"] != null)
     {
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
@@ -41,9 +58,17 @@
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Students", "Index", "Student", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Subjects", "Index", "Subject", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Students-Subjects", "Index", "StdSubject", new { area = "" }, new { @class = "nav-link" })</li>
+                        @if (Session["Role"].ToString() == "Admin")
+                        {
+                            <li>@Html.ActionLink("Students", "Index", "Student", new { area = "" }, new { @class = "nav-link" })</li>
+
+                            <li>@Html.ActionLink("Students-Subjects", "Index", "StdSubject", new { area = "" }, new { @class = "nav-link" })</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Your Subjects", "ByRollNo", "StdSubject", new { RollNo = Session["RollNo"] }, new { @class = "nav-link" })</li>
+                        }
                     </ul>
                 </div>
 
@@ -52,15 +77,18 @@
                     @if (Session["Role"].ToString() == "Admin")
                     {
 
-                        <li>@Html.ActionLink("Users", "Index", "User", new { area = "" }, new { @class = "nav-link btn btn-primary" })</li>
+                        <li>@Html.ActionLink("Users", "Index", "User", new { area = "" }, new { @class = "nav-link ", style = "color: #adb5bd;" })</li>
                     }
-                        <li>
-                            <a href="@Url.Action("Details","User", new { userId = Session["UserId"] })" class="profile-link" title="Profile" style="font-size: 2em; color: black;">
+                    else
+                    {
+                        <li id="profile">
+                            <a href="@Url.Action("Profile", "User", new { userId = Session["UserId"] })" class="profile-link" title="Profile" style="font-size: 2em; color: black;">
                                 <i class="fa-regular fa-circle-user" style="color:white"></i>
                             </a>
                         </li>
-                        <li style="margin-right: 20px; margin-left: 10px; ">@Html.ActionLink("Logout", "Logout", "User", new { }, new { @class = "nav-link btn btn-danger" })</li>
-                    </ul>
+                    }
+                    <li style="margin-right: 20px; margin-left: 10px; ">@Html.ActionLink("Logout", "Logout", "User", new { }, new { @class = "nav-link btn btn-danger" })</li>
+                </ul>
 
 
             </div>
@@ -68,10 +96,19 @@
         </nav>
 
     }
-    <div class="container body-content">
-        @RenderBody()
+    
+<div class="container body-content">
+    @RenderBody()
+    <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
 
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

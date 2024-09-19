@@ -24,9 +24,7 @@
     <table id="myTable" class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.RollNo)
-                </th>
+               
                 <th>
                     @Html.DisplayNameFor(model => model.SubjectId)
                 </th>
@@ -40,9 +38,6 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RollNo)
-                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.SubjectId)
                     </td>

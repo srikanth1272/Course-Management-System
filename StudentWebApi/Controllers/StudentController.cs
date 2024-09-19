@@ -42,6 +42,19 @@ namespace StudentWebApi.Controllers
                 return NotFound(ex.Message);
             }
         }
+        [HttpGet("profile/{email}")]
+        public async Task<ActionResult> Profile(string email)
+        {
+            try
+            {
+                Student student = await repo.CheckStudent(email);
+                return Ok(student);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
 
         [HttpPost]
         public async Task<ActionResult> Insert(Student student)

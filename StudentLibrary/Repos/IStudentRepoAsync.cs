@@ -15,5 +15,6 @@ namespace StudentLibrary.Repos
         Task UpdateStudent(string RollNo, Student student);
         Task DeleteStudent(string RollNo);
         Task<List<Student>> GetStudentByDates(DateOnly sdate, DateOnly edate);
+        Task<Student> CheckStudent(string email);
     }
 }

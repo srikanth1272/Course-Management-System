@@ -36,11 +36,11 @@ namespace CourseApp.Controllers
             List<StdSubject> stdSubjects = await client.GetFromJsonAsync<List<StdSubject>>($"BySemister/{RollNo}/{Semister}");
             return PartialView(stdSubjects);
         }
-        //public async Task<ActionResult> ByRollNo(string RollNo)
-        //{
-        //    List<StdSubject> stdSubjects = await client.GetFromJsonAsync<List<StdSubject>>($"ByRollNo/{RollNo}/");
-        //    return View(stdSubjects);
-        //}
+        public async Task<ActionResult> ByRollNo(string RollNo)
+        {
+            List<StdSubject> stdsubjects = await client.GetFromJsonAsync<List<StdSubject>>($"ByRollNo/{RollNo}");
+            return View(stdsubjects);
+        }
 
         public async Task<ActionResult> Details(string rollNo,string subjectId)
         {

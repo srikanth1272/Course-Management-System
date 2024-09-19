@@ -117,13 +117,15 @@ namespace UserLibrary.Repos
             }
         }
 
-        public async Task UpdateUserAsync(int userId, string username)
+        public async Task UpdateUserAsync(int userId, User user)
         {
             try
             {
                 await con.OpenAsync();
-                cmd.CommandText = "update Users set Username = @username where email = @email";
-                cmd.Parameters.AddWithValue("@username", username);
+                cmd.CommandText = "update Users set Username = @username,Email = @email,Role = @role where userId = @userId";
+                cmd.Parameters.AddWithValue("@role", user.Role);
+                cmd.Parameters.AddWithValue("@email", user.Email);
+                cmd.Parameters.AddWithValue("@username", user.UserName);
                 cmd.Parameters.AddWithValue("@userId", userId);
                 await cmd.ExecuteNonQueryAsync();
                 await con.CloseAsync();

@@ -14,7 +14,9 @@ namespace UserLibrary.Repos
         Task DeleteUserAsync(int userId);
         Task<User> GetUserAsync(int userId);
         Task<List<User>> GetAllUsersAsync();
-        Task UpdateUserAsync(int userId, string username);
+        Task UpdateUserAsync(int userId, User user);
         Task<User> LoginAsync(string email);
+
+        
     }
 }
