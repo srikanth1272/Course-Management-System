@@ -46,16 +46,21 @@
                         <li>@Html.ActionLink("Students-Subjects", "Index", "StdSubject", new { area = "" }, new { @class = "nav-link" })</li>
                     </ul>
                 </div>
-                <ul class=" mr-auto" style="display: flex; align-items: center;right:5px;position:absolute;top:5px">
-                    <li>@Html.ActionLink("Users", "Index", "User", new { area = "" }, new { @class = "nav-link btn btn-primary" })</li>
 
-                    <li>
-                        <a href="@Url.Action("Details","User", new { userId = Session["UserId"] })" class="profile-link" title="Profile" style="font-size: 2em; color: black;">
-                            <i class="fa-regular fa-circle-user" style="color:white"></i>
-                        </a>
-                    </li>
-                    <li style="margin-right: 20px; margin-left: 10px; ">@Html.ActionLink("Logout", "Logout", "User", new { }, new { @class = "nav-link btn btn-danger" })</li>
-                </ul>
+                <ul class=" mr-auto" style="display: flex; align-items: center;right:5px;position:absolute;top:5px">
+
+                    @if (Session["Role"].ToString() == "Admin")
+                    {
+
+                        <li>@Html.ActionLink("Users", "Index", "User", new { area = "" }, new { @class = "nav-link btn btn-primary" })</li>
+                    }
+                        <li>
+                            <a href="@Url.Action("Details","User", new { userId = Session["UserId"] })" class="profile-link" title="Profile" style="font-size: 2em; color: black;">
+                                <i class="fa-regular fa-circle-user" style="color:white"></i>
+                            </a>
+                        </li>
+                        <li style="margin-right: 20px; margin-left: 10px; ">@Html.ActionLink("Logout", "Logout", "User", new { }, new { @class = "nav-link btn btn-danger" })</li>
+                    </ul>
 
 
             </div>

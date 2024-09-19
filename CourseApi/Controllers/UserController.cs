@@ -47,7 +47,7 @@ namespace CourseApi.Controllers
                 var hash1 = System.Text.Encoding.UTF8.GetBytes(pass);
                 user.Password = System.Convert.ToBase64String(hash1);
                 await repo.AddUserAsync(user);
-                return Created($"api/User/{user.Email}", user);
+                return Ok(user);
             }
             catch (UserException ex)
             {
