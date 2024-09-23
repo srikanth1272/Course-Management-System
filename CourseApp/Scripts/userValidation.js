@@ -112,7 +112,7 @@ $(document).ready(function () {
                 success: function (result) {
                     $.ajax({
                         type: "POST",
-                        url: "/User/Authenticate",
+                        url: "/User/Authenticate/",
                         data: JSON.stringify({ userId: result.userId, role: result.role }),
                         contentType: 'application/json',
                         success: function () {

@@ -32,13 +32,14 @@ namespace CourseApp.Controllers
         }
       
         [HttpPost]
-        public async void Authenticate(int userId, String Role)
+        public async Task Authenticate(int userId, String role)
         {
             Session["UserId"] = userId;
-            Session["Role"] = Role;
+            Session["Role"] = role;
             User user = await client.GetFromJsonAsync<User>("" + userId);
             Student student = await client2.GetFromJsonAsync<Student>("profile/" + user.Email);
             Session["RollNo"] = student.RollNo;
+
         }
         public async Task<ActionResult> Details(int userId)
         {
