@@ -108,5 +108,15 @@ namespace CourseApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("checkEmail/{email}")]
+        public async Task<ActionResult> CheckEmail(string email)
+        {
+            User user = await repo.LoginAsync(email);
+            if (user == null)
+                return BadRequest(user);
+            else
+                return Ok(user);
+        }
     }
 }

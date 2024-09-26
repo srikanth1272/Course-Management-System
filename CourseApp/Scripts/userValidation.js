@@ -8,7 +8,8 @@ function validatePassword(password) {
 }
 
 $(document).ready(function () {
-
+    $("#loader").hide();
+    $("#content").show();
     $('#username').blur(function () {
         var username = $("#username").val();
         if (username === '')
@@ -67,17 +68,18 @@ $(document).ready(function () {
                 data: JSON.stringify({ "email": email, "username": username, "password": password, "role": role }),
                 contentType: 'application/json',
                 success: function (result) {
-                    $.ajax({
-                        type: "POST",
-                        url: "/User/Authenticate",
-                        data: JSON.stringify({ userId: result.userId, role: result.role }),
-                        contentType: 'application/json',
-                        success: function () {
-                            toastr.success("Registered Successfully and Logged In.")
+                    
+                    //$.ajax({
+                    //    type: "POST",
+                    //    url: "/User/Authenticate/",
+                    //    data: JSON.stringify({ userId: result.userId, role: result.role }),
+                    //    contentType: 'application/json',
+                    //    success: function () {
+                            toastr.success("Registered Successfully.")
                            
-                            setTimeout(function () { window.location.href = "/home/Index"; }, 1000);
-                        }
-                    });
+                            setTimeout(function () { window.location.href = "/User/Login"; }, 1000);
+                    //    }
+                    //});
                 },
                 error: function (jqXHR) { 
                     errorMessage = jqXHR.responseText;
@@ -110,6 +112,8 @@ $(document).ready(function () {
                 data: JSON.stringify({ "email": email, "username": "", "password": password, "role": "" }),
                 contentType: 'application/json',
                 success: function (result) {
+                    $("#loader").show();
+                    $("#content").hide();
                     $.ajax({
                         type: "POST",
                         url: "/User/Authenticate/",
@@ -178,15 +182,4 @@ $(document).ready(function () {
 
 
 
-//$(document).ready(function () {
 
-//    $("#loader").show();
-//    $("#content").hide();
-
-
-//    setTimeout(function () {
-
-//        $("#loader").hide();
-//        $("#content").show();
-//    }, 1000);
-//});
