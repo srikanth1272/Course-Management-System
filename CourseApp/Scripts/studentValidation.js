@@ -116,20 +116,35 @@ $(document).ready(function () {
 
     });
 
-    $("#toDate").blur(function () {
+    $("#DateFilterForm").on('submit', function (event) {
+        event.preventDefault();
+     
+        var isvalid = true;
+        console.log("hello")
         $("#toDateError").text('');
-        var todate = $("toDate").val();
-        var fromdate = $("fromDate").val();
-        if (todate < fromdate)
-            $("#toDateError").text('Must be greater than fromdate');
-    });
-    $("#fromDate").blur(function () {
-        $("#fromDateError").text('');
-        var todate = $("fromDate").val();
-        var fromdate = $("toDate").val();
-        if (todate > fromdate)
-            $("#fromDateError").text('Must be lower than todate');
-    });
+        var date = $("#toDate").val();
+        var todate = new Date(date);
+        var date = $("#fromDate").val();
+        var fromdate = new Date(date);
+        console.log(todate);
+        if (todate < fromdate) {
+            $("#toDateError").text('Must be greater than Startdate');
+            isvalid = false;
+        }
+ 
+        $("#fromDate").blur(function () {
+            $("#fromDateError").text('');
+            var todate = $("#fromDate").val();
+            var fromdate = $("#toDate").val();
+            if (todate > fromdate) {
+                $("#fromDateError").text('Must be lower than Enddate');
+                isvalid = false;
+            }
+        });
+        if (isvalid)
+            this.submit();
+    })
+    
 });
 
 
