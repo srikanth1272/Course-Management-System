@@ -4,7 +4,9 @@
     ViewBag.Title = "CollectDates";
 }
 
-
+<head>
+    <script src='@Url.Content("~/Scripts/studentValidation.js")' type='text/javascript'></script>
+</head>
 
 @using (Html.BeginForm("CollectDates", "Student", FormMethod.Post, new { @id = "DateFilterForm" }))
 {
@@ -17,16 +19,16 @@
         <div class="form-group">
             @Html.Label("Sdate", "From", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Sdate, new { htmlAttributes = new { @class = "form-control",type = "date" } })
-                @Html.ValidationMessageFor(model => model.Sdate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Sdate, new { htmlAttributes = new { @class = "form-control", type = "date", @id = "fromDate" } })
+                <span class="error text-danger" id="fromDateError"></span>
             </div>
         </div>
 
         <div class="form-group">
             @Html.Label("Edate", "To", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Edate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
-                @Html.ValidationMessageFor(model => model.Edate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Edate, new { htmlAttributes = new { @class = "form-control", type = "date", @id = "toDate" } })
+                <span class="error text-danger" id="toDateError"></span>
             </div>
         </div>
 
@@ -44,4 +46,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+   
 }

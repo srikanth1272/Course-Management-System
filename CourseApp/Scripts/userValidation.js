@@ -27,15 +27,14 @@ $(document).ready(function () {
             $('#emailError').text('Email is required');
         else if (!validateEmail(email))
             $('#emailError').text("Enter a valid Email");
-    
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:5299/api/User/checkEmail/" + email,
-                success: function () {
-                    $('#emailError').text('This Email is already Registered');
-                }
-            })
-        });
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:5299/api/User/checkEmail/" + email,
+            success: function () {
+                $('#emailError').text('This Email is already Registered');
+            }
+        })
     });
     $('#lemail').blur(function () {
         $('#emailError').text('');
@@ -44,7 +43,7 @@ $(document).ready(function () {
             $('#emailError').text('Email is required');
         else if (!validateEmail(email))
             $('#emailError').text("Enter a valid Email");
-        
+
         $.ajax({
             type: "GET",
             url: "http://localhost:5299/api/User/checkEmail/" + email,
@@ -52,7 +51,6 @@ $(document).ready(function () {
                 $('#emailError').text('This email is not Registered');
                 isValid = false;
             }
-        })
         });
     });
     $('#password').blur(function () {
@@ -60,9 +58,9 @@ $(document).ready(function () {
         var password = $("#password").val();
         if (password === '')
             $('#passwordError').text('Password is required');
-        else if (password.length < 8) 
+        else if (password.length < 8)
             $('#passwordError').text('password length must be above 8');
-        else if (!validatePassword(password)) 
+        else if (!validatePassword(password))
             $('#passwordError').text("password must contain at least one uppercase letter, one special character, and one number");
     });
     $('#RegisterForm').on('submit', function (event) {
@@ -80,13 +78,13 @@ $(document).ready(function () {
             $('#emailError').text('Email is required');
             isValid = false;
         }
-      
-      
+
+
         var password = $("#password").val();
         if (password === '') {
             $('#passwordError').text('password is required');
             isValid = false;
-        } 
+        }
         var confirmPassword = $('#confirmPassword').val();
         if (confirmPassword != password) {
             $('#confirmPasswordError').text('Password Does not Match. Please Check');
@@ -100,20 +98,20 @@ $(document).ready(function () {
                 data: JSON.stringify({ "email": email, "username": username, "password": password, "role": role }),
                 contentType: 'application/json',
                 success: function (result) {
-                    
+
                     //$.ajax({
                     //    type: "POST",
                     //    url: "/User/Authenticate/",
                     //    data: JSON.stringify({ userId: result.userId, role: result.role }),
                     //    contentType: 'application/json',
                     //    success: function () {
-                            toastr.success("Registered Successfully.")
-                           
-                            setTimeout(function () { window.location.href = "/User/Login"; }, 1000);
+                    toastr.success("Registered Successfully.")
+
+                    setTimeout(function () { window.location.href = "/User/Login"; }, 1000);
                     //    }
                     //});
                 },
-                error: function (jqXHR) { 
+                error: function (jqXHR) {
                     errorMessage = jqXHR.responseText;
                     toastr.error(errorMessage);
                 }
@@ -133,7 +131,7 @@ $(document).ready(function () {
         }
         $('#lemail').blur(function () {
             $('#emailError').text('');
-           
+
         });
 
         var password = $("#password").val();
@@ -199,12 +197,12 @@ $(document).ready(function () {
         if (isValid) {
             $.ajax({
                 type: "PUT",
-                url: "http://localhost:5299/api/User/"+userid,
-                data: JSON.stringify({ "userid": userid , "email": email, "username": username, "password": "", "role": role }),
+                url: "http://localhost:5299/api/User/" + userid,
+                data: JSON.stringify({ "userid": userid, "email": email, "username": username, "password": "", "role": role }),
                 contentType: 'application/json',
-                success: function () {    
-                            toastr.success("Assigned Role Successfully")
-                            setTimeout(function () { window.location.href = "/User/Index"; }, 1000);                      
+                success: function () {
+                    toastr.success("Assigned Role Successfully")
+                    setTimeout(function () { window.location.href = "/User/Index"; }, 1000);
                 },
                 error: function (jqXHR) {
 
@@ -212,10 +210,9 @@ $(document).ready(function () {
                     toastr.error(errorMessage);
                 }
             });
+
         }
+
     });
+
 });
-
-
-
-

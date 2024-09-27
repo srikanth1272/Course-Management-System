@@ -115,6 +115,21 @@ $(document).ready(function () {
         }
 
     });
+
+    $("#toDate").blur(function () {
+        $("#toDateError").text('');
+        var todate = $("toDate").val();
+        var fromdate = $("fromDate").val();
+        if (todate < fromdate)
+            $("#toDateError").text('Must be greater than fromdate');
+    });
+    $("#fromDate").blur(function () {
+        $("#fromDateError").text('');
+        var todate = $("fromDate").val();
+        var fromdate = $("toDate").val();
+        if (todate > fromdate)
+            $("#fromDateError").text('Must be lower than todate');
+    });
 });
 
 
