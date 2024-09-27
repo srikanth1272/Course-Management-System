@@ -10,7 +10,9 @@ function validatePassword(password) {
 $(document).ready(function () {
     $("#loader").hide();
     $("#content").show();
+
     $('#username').blur(function () {
+        $('#userNameError').text('');
         var username = $("#username").val();
         if (username === '')
             $('#userNameError').text('Username is Required');
@@ -19,6 +21,7 @@ $(document).ready(function () {
     });
 
     $('#email').blur(function () {
+        $('#emailError').text('');
         var email = $(this).val();
         if (email === '')
             $('#emailError').text('Email is required');
@@ -37,6 +40,7 @@ $(document).ready(function () {
     });
 
     $('#password').blur(function () {
+        $('#passwordError').text('');
         var password = $("#password").val();
         if (password === '')
             $('#passwordError').text('Password is required');
@@ -59,7 +63,18 @@ $(document).ready(function () {
         if (email === '') {
             $('#emailError').text('Email is required');
             isValid = false;
-        } 
+        }
+        $('#email').blur(function () {
+            $('#emailError').text('');
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:5299/api/User/checkEmail/" + email,
+                success: function () {
+                    $('#emailError').text('This Email is already Registered');
+                    isValid = false;
+                }
+            })
+        });
       
         var password = $("#password").val();
         if (password === '') {
@@ -110,6 +125,17 @@ $(document).ready(function () {
             $('#emailError').text('Email is required');
             isValid = false;
         }
+        $('#email').blur(function () {
+            $('#emailError').text('');
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:5299/api/User/checkEmail/" + email,
+                error: function () {
+                    $('#emailError').text('This email is not Registered');
+                    isValid = false;
+                }
+            })
+        });
 
         var password = $("#password").val();
         if (password === '') {
