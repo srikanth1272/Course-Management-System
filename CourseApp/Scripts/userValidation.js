@@ -27,18 +27,34 @@ $(document).ready(function () {
             $('#emailError').text('Email is required');
         else if (!validateEmail(email))
             $('#emailError').text("Enter a valid Email");
+    
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:5299/api/User/checkEmail/" + email,
+                success: function () {
+                    $('#emailError').text('This Email is already Registered');
+                }
+            })
+        });
+    });
+    $('#lemail').blur(function () {
+        $('#emailError').text('');
+        var email = $(this).val();
+        if (email === '')
+            $('#emailError').text('Email is required');
+        else if (!validateEmail(email))
+            $('#emailError').text("Enter a valid Email");
+        
         $.ajax({
             type: "GET",
             url: "http://localhost:5299/api/User/checkEmail/" + email,
-            success: function () {
-                $('#emailError').text('Email already exists');
-            },
             error: function () {
-                alert("failed fetching data.")
+                $('#emailError').text('This email is not Registered');
+                isValid = false;
             }
         })
+        });
     });
-
     $('#password').blur(function () {
         $('#passwordError').text('');
         var password = $("#password").val();
@@ -64,17 +80,7 @@ $(document).ready(function () {
             $('#emailError').text('Email is required');
             isValid = false;
         }
-        $('#email').blur(function () {
-            $('#emailError').text('');
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:5299/api/User/checkEmail/" + email,
-                success: function () {
-                    $('#emailError').text('This Email is already Registered');
-                    isValid = false;
-                }
-            })
-        });
+      
       
         var password = $("#password").val();
         if (password === '') {
@@ -120,21 +126,14 @@ $(document).ready(function () {
         $('.error').text('');
         var isValid = true;
 
-        var email = $("#email").val();
+        var email = $("#lemail").val();
         if (email === '') {
             $('#emailError').text('Email is required');
             isValid = false;
         }
-        $('#email').blur(function () {
+        $('#lemail').blur(function () {
             $('#emailError').text('');
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:5299/api/User/checkEmail/" + email,
-                error: function () {
-                    $('#emailError').text('This email is not Registered');
-                    isValid = false;
-                }
-            })
+           
         });
 
         var password = $("#password").val();
