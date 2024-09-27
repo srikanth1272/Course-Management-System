@@ -30,15 +30,6 @@ namespace CourseApp.Controllers
             List<User> users = await client.GetFromJsonAsync<List<User>>("");
             return View(users);
         }
-
-        public async Task<ActionResult> CheckEmail(string Email)
-        {
-            User user = await client.GetFromJsonAsync<User>("CheckEmail/" + Email);
-            if(user == null)
-            {
-
-            }
-        } 
       
         [HttpPost]
         public async Task Authenticate(int userId, String role)

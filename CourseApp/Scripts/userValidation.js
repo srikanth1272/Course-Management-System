@@ -24,6 +24,16 @@ $(document).ready(function () {
             $('#emailError').text('Email is required');
         else if (!validateEmail(email))
             $('#emailError').text("Enter a valid Email");
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:5299/api/User/checkEmail/" + email,
+            success: function () {
+                $('#emailError').text('Email already exists');
+            },
+            error: function () {
+                alert("failed fetching data.")
+            }
+        })
     });
 
     $('#password').blur(function () {
@@ -50,6 +60,7 @@ $(document).ready(function () {
             $('#emailError').text('Email is required');
             isValid = false;
         } 
+      
         var password = $("#password").val();
         if (password === '') {
             $('#passwordError').text('password is required');
