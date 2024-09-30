@@ -19,6 +19,11 @@ namespace CourseApp.Controllers
             List<StdSubject> stdSubjects = await client.GetFromJsonAsync<List<StdSubject>>("");
             return View(stdSubjects);
         }
+        public async Task<ActionResult> GetDetails()
+        {
+            List<StdSubject> stdSubjects = await client.GetFromJsonAsync<List<StdSubject>>("Details");
+            return View(stdSubjects);
+        }
         public async Task<ActionResult> Student(string rollNo)
         {
             Student student = await client.GetFromJsonAsync<Student>("student/" + rollNo);

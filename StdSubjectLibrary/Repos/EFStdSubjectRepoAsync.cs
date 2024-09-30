@@ -2,6 +2,7 @@
 using StdSubjectLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,6 +62,28 @@ namespace StdSubjectLibrary.Repos
                 {
                     RollNo = (string)reader["RollNo"],
                     SubjectId = (string)reader["SubjectId"],
+                    Semister = (int)reader["Semister"]
+                };
+                stdSubjects.Add(stdSubject);
+            }
+            await con.CloseAsync();
+            return stdSubjects;
+        }
+        public async Task<List<StdSubject>> GetDetails()
+        {
+            List<StdSubject> stdSubjects = new List<StdSubject>();
+            cmd.CommandText = "stdSubjectProcedure";
+            cmd.CommandType = CommandType.StoredProcedure;
+            await con.OpenAsync();
+            SqlDataReader reader = await cmd.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                StdSubject stdSubject = new()
+                {
+                    RollNo = (string)reader["RollNo"],
+                    SubjectId = (string)reader["SubjectId"],
+                    studentdetails = (string)reader["studentdetails"],
+                    subjectdetails = (string)reader["Subjectdetails"],
                     Semister = (int)reader["Semister"]
                 };
                 stdSubjects.Add(stdSubject);

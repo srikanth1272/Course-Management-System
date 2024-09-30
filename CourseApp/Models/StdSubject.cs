@@ -14,6 +14,8 @@ namespace CourseApp.Models
         public string RollNo { get; set; }
         public string SubjectId { get; set; }
         public int Semister { get; set; }
-      
+        public string studentdetails { get; set; }
+        public string subjectdetails { get; set; }
+
     }
 }

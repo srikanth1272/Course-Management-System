@@ -11,6 +11,7 @@ namespace StdSubjectLibrary.Repos
     public interface IStdSubjectRepoAsync
     {
         Task<List<StdSubject>> GetAllStudentsSubjects();
+        Task<List<StdSubject>> GetDetails();
         Task<StdSubject> GetStudentSubject(string RollNo, string SubjectId);
         Task AddStudentSubject(StdSubject student);
         Task UpdateStudentSubject(string RollNo, string SubjectId, StdSubject student);

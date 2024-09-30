@@ -31,14 +31,14 @@
             $.ajax({
                 type: requestType,
                 url: url,
-                data: JSON.stringify({ "RollNo": RollNo, "SubjectId": SubjectId, "Semister": Semister }),
+                data: JSON.stringify({ "RollNo": RollNo, "SubjectId": SubjectId, "Semister": Semister,"studentdetails":" ","subjectdetails" :" "}),
                 contentType: 'application/json',
                 success: function (response) {
                     var successMessage = $('#edit').val() === 'Save'
                         ? "Updated Successfully."
                         : "Subject Added Successfully.";
                     toastr.success(successMessage)
-                    setTimeout(function () { window.location.href = "/StdSubject/Index"; }, 1000);
+                    setTimeout(function () { window.location.href = "/StdSubject/GetDetails"; }, 1000);
                 },
                 error: function (jqXHR) {
                     errorMessage = jqXHR.responseText;

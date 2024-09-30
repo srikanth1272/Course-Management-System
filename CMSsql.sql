@@ -40,3 +40,14 @@ Semister INT not null,
 primary key(RollNo,SubjectId)
 )
 
+alter procedure stdSubjectProcedure as
+Begin
+ select std.rollNo ,std.SubjectId,
+        CONCAT(s.RollNo,' : ',s.FirstName,' ',s.LastName) as studentdetails ,
+        CONCAT(sb.SubjectId,' : ',sb.Title) as subjectdetails,
+        std.Semister from StdSubject std 
+        inner join Student s on std.RollNo = s.RollNo 
+        inner join Subject sb on std.SubjectId = sb.SubjectId
+END;
+
+exec stdSubjectProcedure

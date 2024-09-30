@@ -1,0 +1,101 @@
+﻿@model IEnumerable<CourseApp.Models.StdSubject>
+
+@{
+    ViewBag.Title = "Index";
+}
+<html>
+<head>
+    <script type="text/javascript">
+        var js = jQuery.noConflict();
+        js(document).ready(function () {
+            js('#myTable').DataTable();
+            js('#myTable').on('click', 'a.subject-link,a.student-link,a.semister-link, a.Edit-link,a.delete-link,a.create-link', function (e) {
+                e.preventDefault();
+
+                var url = js(this).attr('href');
+
+                js.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (result) {
+                        js('#detailsModal .modal-body').html(result);
+                        js('#detailsModal').modal('show');
+                    },
+                    error: function () {
+                        alert('Error loading details');
+                    }
+                });
+            });
+        });
+
+    </script>
+
+</head>
+
+<body class="body">
+    <center><h2>STUDENT SUBJECTS</h2></center>
+
+    <p>
+        @Html.ActionLink("Add Student Subject", "Create", new { }, new { @class = " btn btn-primary" })
+    </p>
+    <table id="myTable" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.studentdetails)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.subjectdetails)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Semister)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.studentdetails)
+                        <a href="@Url.Action("Student", new { RollNo = item.RollNo })" class="student-link" title="View Details">
+                            <i class="fa-solid fa-caret-up" style="color:black"></i>
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.subjectdetails)
+                        <a href="@Url.Action("Subject", new { SubjectId = item.SubjectId })" class="subject-link" title="View Details">
+                            <i class="fa-solid fa-caret-up" style="color:black"></i>
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Semister)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { RollNo = item.RollNo , SubjectId = item.SubjectId })" class="Edit-link" title="Edit">
+                            <i class="fa-regular fa-pen-to-square" style="color:black"></i>
+                        </a>
+                        <a href="@Url.Action("BySemister", new { RollNo = item.RollNo, Semister = item.Semister })" class="semister-link" title="BySemister">
+                            <i class="fa-solid fa-list" style="color:blue"></i>
+                        </a>
+                        <a href="@Url.Action("Delete", new {  RollNo = item.RollNo, SubjectId = item.SubjectId })" class="delete-link" title="Delete">
+                            <i class="fa-regular fa-trash-can" style="color:red"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

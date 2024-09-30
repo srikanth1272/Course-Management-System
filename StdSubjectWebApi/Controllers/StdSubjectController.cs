@@ -29,6 +29,12 @@ namespace StdSubjectWebApi.Controllers
             List<StdSubject> stdSubjects = await repo.GetAllStudentsSubjects();
             return Ok(stdSubjects);
         }
+        [HttpGet("Details")]
+        public async Task<ActionResult> GetDetails()
+        {
+            List<StdSubject> stdSubjects = await repo.GetDetails();
+            return Ok(stdSubjects);
+        }
         [HttpGet("student/{rollNo}")]
         public async Task<ActionResult> GetStudent(string rollNo)
         {
